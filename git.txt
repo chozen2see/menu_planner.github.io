@@ -1,0 +1,7 @@
+find repo in browser
+
+clone / download repo
+copy this
+
+git remote set-url origin [paste path]
+git remote -v
