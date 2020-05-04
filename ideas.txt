@@ -1,0 +1,23 @@
+Food
+  name
+  type ('A','B','C')
+  class ('Protein', 'Carbohydrate', 'Fruit', 'Vegetable')
+
+Meal
+  Protein
+  Carbohydrate
+  Fruit
+  Vegetable
+
+Menu
+  Name
+  Date
+  Breakfast
+  AM Snack
+  Lunch
+  Afternoon
+  Dinner
+  PM Snack
+
+User
+  menu_planner: []
