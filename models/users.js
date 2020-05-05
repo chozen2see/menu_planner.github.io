@@ -1,30 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-// create Food Schema
-
-// create Meal Schema
-
-// create Menu Schema
-const menuSchema = new Schema({
-  name: { type: String, required: true, maxlength: 100 },
-  date: { type: Date },
-  breakfast: { mealSchema },
-  morning_snack: { mealSchema },
-  lunch: { mealSchema },
-  afternoon_snack: { mealSchema },
-  dinner: { mealSchema },
-  evening_snack: { mealSchema },
-});
+const menuSchema = require('menu.js');
 
 // create User Schema
 const userSchema = new Schema(
   {
     username: { type: String, required: true, maxlength: 30 },
-    activeSession: { type: Boolean },
+    body_type: { type: String }, // A, B, C, D, E - Based on Body Type Quiz
     menu_planner: [
       {
-        menuSchema,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Menu',
       },
     ],
   },

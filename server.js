@@ -54,6 +54,17 @@ app.use(express.static('public'));
 
 // --> app.use('/fruits', fruitsController);
 
+// DATA
+const seedData = require('./models/seed/food.js');
+const Food = require('./models/food.js'); // ./ used for relative path (not node_modules)
+
+// FOOD SEED ROUTE
+app.get('/food/seed', (req, res) => {
+  Food.create(seedData, (err, data) => {
+    res.send(data);
+  });
+});
+
 /**********************
  * APP LISTENER
  **********************/
