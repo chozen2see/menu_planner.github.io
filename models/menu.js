@@ -12,6 +12,10 @@ const menuSchema = new Schema(
     afternoon_snack: { type: mongoose.Schema.Types.ObjectId, ref: 'Meal' },
     dinner: { type: mongoose.Schema.Types.ObjectId, ref: 'Meal' },
     evening_snack: { type: mongoose.Schema.Types.ObjectId, ref: 'Meal' },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
   { timestamps: true } // add a timestamp to each document
 );

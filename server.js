@@ -45,25 +45,22 @@ app.use(express.static('public'));
  **********************/
 
 // controller (must come after middleware)
-// --> const fruitsController = require('./controllers/fruits.js');
+const blueprintController = require('./controllers/blueprint.js');
+const foodController = require('./controllers/food.js');
+const mealController = require('./controllers/meal.js');
+const menuController = require('./controllers/menu.js');
+const userController = require('./controllers/users.js');
 
 // routes -  when you get to certain route, use this controller
-// if begins with /fruits use fruitsController to handle the rest of the request
-// find remaining match of url in the fruitsController
+// if begins with /food use foodController to handle the rest of the request
+// find remaining match of url in the foodController
 // use middleware to access controller
 
-// --> app.use('/fruits', fruitsController);
-
-// DATA
-const seedData = require('./models/seed/food.js');
-const Food = require('./models/food.js'); // ./ used for relative path (not node_modules)
-
-// FOOD SEED ROUTE
-app.get('/food/seed', (req, res) => {
-  Food.create(seedData, (err, data) => {
-    res.send(data);
-  });
-});
+app.use('/blueprint', blueprintController);
+app.use('/food', foodController);
+app.use('/meal', mealController);
+app.use('/menu', menuController);
+app.use('/user', userController);
 
 /**********************
  * APP LISTENER
