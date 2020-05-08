@@ -44,13 +44,13 @@ router.get('/new', (req, res) => {
 //   });
 // });
 
-// User SHOW ROUTE
-router.get('/:id', (req, res) => {
-  User.findById(req.params.id, (error, foundUser) => {
-    res.send(foundUser);
-    // res.render('Show', { user: foundUser });
-  });
-});
+// // User SHOW ROUTE
+// router.get('/:id', (req, res) => {
+//   User.findById(req.params.id, (error, foundUser) => {
+//     res.send(foundUser);
+//     // res.render('Show', { user: foundUser });
+//   });
+// });
 
 // EDIT ROUTE
 router.get('/:id/edit', (req, res) => {
@@ -60,7 +60,7 @@ router.get('/:id/edit', (req, res) => {
   });
 });
 
-// MENU PLANNER ROUTE
+// USER MENU PLANNER SHOW ROUTE
 router.get('/menu_planner/:userId', (req, res) => {
   const userId = req.params.userId;
   User.findById(userId)

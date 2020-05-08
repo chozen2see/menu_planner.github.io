@@ -6,6 +6,7 @@ const seedData = require('../models/seed/food.js');
 
 // MODEL
 const Food = require('../models/food.js'); // ./ used for relative path (not node_modules)
+const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -38,10 +39,14 @@ router.get('/', (req, res) => {
 
 // FOOD SHOW ROUTE
 router.get('/:id', (req, res) => {
-  Food.findById(req.params.id, (error, foundFood) => {
-    // console.log(foundFood);
-    res.send(foundFood);
-    // res.render('Show', { food: foundFood });
+  Food.findById(req.params.id, async (error, foundFood) => {
+    // find the current active user
+    const foundUser = await User.findOne({
+      // _id: currentUser._id,
+      activeSession: true,
+    });
+
+    res.render('Food_Show', { food: foundFood, user: foundUser });
   });
 });
 

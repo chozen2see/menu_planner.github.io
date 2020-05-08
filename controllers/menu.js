@@ -6,6 +6,7 @@ const seedData = require('../models/seed/menu.js');
 
 // MODEL
 const Menu = require('../models/menu.js'); // ./ used for relative path (not node_modules)
+const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -43,10 +44,17 @@ router.get('/new', (req, res) => {
 
 // Menu SHOW ROUTE
 router.get('/:id', (req, res) => {
-  Menu.findById(req.params.id, (error, foundMenu) => {
-    res.send(foundMenu);
-    // res.render('Show', { menu: foundMenu });
-  });
+  Menu.findById(req.params.id)
+    .populate('meal')
+    .exec(async (error, foundMenu) => {
+      // find the current active user
+      const foundUser = await User.findOne({
+        // _id: currentUser._id,
+        activeSession: true,
+      });
+
+      res.render('Menu_Show', { menu: foundMenu, user: foundUser });
+    });
 });
 
 // EDIT ROUTE

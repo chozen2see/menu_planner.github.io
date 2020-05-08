@@ -6,15 +6,9 @@ class User_Index extends React.Component {
     const { user, food, menu, meal } = this.props;
     // console.log(user);
 
-    let username = user.name;
-    username = username.charAt(0).toUpperCase() + username.slice(1);
-
     // render method must return something...
     return (
-      <AppLayout
-      //  currentUser={currentUser}
-      >
-        <h1>{username} Menu Planner</h1>
+      <AppLayout currentUser={user}>
         <div className='container'>
           {/* USER PANEL */}
           <div className='user_panel'>
@@ -45,9 +39,6 @@ class User_Index extends React.Component {
             </div>
             <div className='user_info w3-container'>
               <p className='w3-container'>User Name: {user.name}</p>
-              <p className='w3-container'>
-                Body Type: {user.blueprint.body_type.alias}
-              </p>
               <p className='w3-container'>Height: {user.height}</p>
               <p className='w3-container'>
                 Starting Weight: {user.startingWeight}
@@ -56,6 +47,13 @@ class User_Index extends React.Component {
                 Current Weight: {user.currentWeight}
               </p>
               <p className='w3-container'>Goal Weight: {user.goalWeight}</p>
+              <p className='w3-container'>
+                Body Type: {user.blueprint.body_type.alias} (
+                {user.blueprint.body_type.name})
+              </p>
+              <p className='w3-container'>
+                {user.blueprint.body_type.description}
+              </p>
             </div>
           </div>
 
@@ -110,7 +108,7 @@ class User_Index extends React.Component {
                   </a> */}
                 </div>
                 <div className='aside_header_seeAll'>
-                  <a href='/meal' className='seeAll'>
+                  <a href='/meal' className='seeAll_meals'>
                     SEE ALL
                   </a>
                 </div>

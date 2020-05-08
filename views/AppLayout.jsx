@@ -7,15 +7,16 @@ class AppLayout extends React.Component {
     //     ? this.props.currentUser._id
     //     : '5eacca26965eadc463792723';
 
-    // const username =
-    //   this.props.currentUser.username !== undefined
-    //     ? this.props.currentUser.username.charAt(0).toUpperCase() +
-    //       this.props.currentUser.username.slice(1)
-    //     : 'New User';
+    const username =
+      this.props.currentUser.name !== undefined
+        ? this.props.currentUser.name.charAt(0).toUpperCase() +
+          this.props.currentUser.name.slice(1)
+        : 'New User';
 
     return (
       <html>
         <head>
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
           <link
             rel='stylesheet'
             href='https://www.w3schools.com/w3css/4/w3.css'
@@ -26,20 +27,22 @@ class AppLayout extends React.Component {
           <title>Menu Planner</title>
         </head>
         <body>
-          {/* <header>
-            <img
+          <header>
+            {/* <img
               src='/images/logo.png'
               alt='Mongoose Store Logo'
               className='logo'
             />
-            <p className='greeting'>Welcome, {username}!</p>
+            <p className='greeting'>Welcome, {username}!</p> */}
+            <h2>{username} Menu Planner</h2>
+            <nav>
+              <a href='/meal/new'>Create Meal</a>
+              <a href='/menu/new'>Create Menu</a>
+              <a href={`/user/menu_planner/${this.props.currentUser.id}`}>
+                View Menu Planner
+              </a>
+            </nav>
           </header>
-          <nav>
-            <a href='/store'>Shop</a>
-            <a href='/product/new'>Add New Product</a>
-            <a href={`/user/${id}`}>View Cart</a>
-          </nav> */}
-          <br />
           <div className='wrapper'>{this.props.children}</div>
           <footer>
             <p className='copyright'>Copyright Menu Planner &copy; 2020</p>

@@ -1,3 +1,9 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
 :root {
   --muted-orange: #fe9a12;
   --muted-blue: #1aa5bf;
@@ -59,12 +65,53 @@ body {
   color: var(--door-blue);
 }
 
-div {
-  /* border: 2px solid var(--door-blue); */
+/* p {
+  margin: 10px 5px;
+  padding: 10px 15px;
+} */
+
+header {
+  display: flex;
+  justify-content: space-between;
 }
 
-h1 {
+header h2 {
+  flex: 0.4;
+  min-width: 400px;
+}
+
+header nav {
+  flex: 0.6;
+}
+
+header h2,
+header nav,
+footer {
+  /* border: 2px solid red; */
   padding: 0 1.5%;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+nav a {
+  /* margin-top: 10px; */
+  padding: 0 25px;
+  background-color: var(--door-blue);
+  color: whitesmoke;
+  line-height: 60px;
+  font-size: large;
+  min-width: 225px;
+}
+
+nav a:hover {
+  color: var(--door-blue);
+  background-color: white;
+  border-bottom: 3px solid var(--door-blue);
 }
 
 .container {
@@ -79,10 +126,11 @@ h1 {
 }
 
 .user_panel {
-  flex: 0.2;
+  flex: 0.25;
   border: 1px solid lightgrey;
-  padding: 10px;
+  padding: 5px;
   min-width: 300px;
+  overflow-y: auto;
 }
 
 .user_top {
@@ -105,7 +153,7 @@ h1 {
   /* flex-direction: column; */
   align-items: center;
   justify-content: space-evenly;
-  margin: 10px 2%;
+  margin: 5px 2%;
   /* border: 2px solid var(--door-blue); */
 }
 
@@ -122,12 +170,12 @@ h1 {
 }
 
 .user_info {
-  margin: 15px auto;
+  margin: 3px auto;
   font-size: 1.2em;
 }
 
 .menu_planner {
-  flex: 0.79;
+  flex: 0.74;
   /* border: 1px solid lightgrey; */
   display: flex;
   flex-direction: column;
@@ -137,7 +185,7 @@ h1 {
 }
 
 aside {
-  flex: 0.3;
+  flex: 0.28;
   border: 1px solid var(--door-blue);
   font-size: 1.1em;
 }
@@ -156,6 +204,11 @@ aside:nth-child(2) {
   padding: 0 1%;
   display: flex;
   /* vertical-align: text-bottom; */
+}
+
+.aside_header_title_meals,
+.seeAll_meals {
+  color: whitesmoke;
 }
 
 .aside_header_title_menus,
@@ -193,7 +246,7 @@ aside:nth-child(2) {
 .aside_body {
   display: flex;
 
-  padding: 15px;
+  padding: 10px 15px;
   overflow-x: auto;
 }
 
@@ -203,15 +256,23 @@ aside:nth-child(2) {
 
 .card {
   margin: 15px;
-  padding: 10px;
+  padding: 5px 10px;
   width: 175px;
-  height: 150px;
+  height: 125px;
   font-size: 1.1em;
+  text-align: center;
+  border: 1px solid lightgrey;
+}
+
+.card_menu_item:hover,
+.card_meal_item:hover,
+.card_food_item:hover {
+  color: whitesmoke;
+  border: 1px solid var(--door-blue);
 }
 
 .card_menu_item:hover {
   background-color: var(--door-orange);
-  color: whitesmoke;
 }
 
 .card_meal_item:hover {
@@ -221,4 +282,12 @@ aside:nth-child(2) {
 
 .card_food_item:hover {
   background-color: var(--door-green);
+}
+
+footer {
+  display: none;
+  text-align: center;
+  padding-top: 5px;
+  position: absolute;
+  bottom: 0;
 }
