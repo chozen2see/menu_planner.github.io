@@ -45,8 +45,13 @@ router.get('/new', (req, res) => {
 // Menu SHOW ROUTE
 router.get('/:id', (req, res) => {
   Menu.findById(req.params.id)
-    .populate('meal')
+    .populate({
+      path:
+        'breakfast morning_snack lunch afternoon_snack dinner evening_snack',
+      model: 'Meal',
+    })
     .exec(async (error, foundMenu) => {
+      console.log(foundMenu);
       // find the current active user
       const foundUser = await User.findOne({
         // _id: currentUser._id,
