@@ -20,12 +20,20 @@ const Blueprint = require('../models/blueprint.js'); // ./ used for relative pat
 
  */
 
-// Blueprint SEED ROUTE
-router.get('/seed', (req, res) => {
-  Blueprint.create(seedData, (err, data) => {
-    res.send(data);
+// INDEX ROUTE
+router.get('/sandbox', (req, res) => {
+  Blueprint.find({}, (error, allBlueprints) => {
+    res.send(allBlueprints);
+    // res.render('Index', { User: allUsers });
   });
 });
+
+// // Blueprint SEED ROUTE
+// router.get('/seed', (req, res) => {
+//   Blueprint.create(seedData, (err, data) => {
+//     res.send(data);
+//   });
+// });
 
 /*******************************
  * Functional Routes - perform functions in the browser (http verb)

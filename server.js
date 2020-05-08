@@ -45,6 +45,7 @@ app.use(express.static('public'));
  **********************/
 
 // controller (must come after middleware)
+const bodyTypeController = require('./controllers/bodytype.js');
 const blueprintController = require('./controllers/blueprint.js');
 const foodController = require('./controllers/food.js');
 const mealController = require('./controllers/meal.js');
@@ -56,6 +57,7 @@ const userController = require('./controllers/users.js');
 // find remaining match of url in the foodController
 // use middleware to access controller
 
+app.use('/bodytype', bodyTypeController);
 app.use('/blueprint', blueprintController);
 app.use('/food', foodController);
 app.use('/meal', mealController);

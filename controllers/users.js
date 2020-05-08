@@ -6,6 +6,9 @@ const seedData = require('../models/seed/users.js');
 
 // MODEL
 const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
+const Food = require('../models/food.js'); // ./ used for relative path (not node_modules)
+const Meal = require('../models/meal.js'); // ./ used for relative path (not node_modules)
+const Menu = require('../models/menu.js'); // ./ used for relative path (not node_modules)
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -20,8 +23,8 @@ const User = require('../models/users.js'); // ./ used for relative path (not no
 
  */
 
-// INDEX ROUTE
-router.get('/', (req, res) => {
+// SANDBOX ROUTE - SEE DATA ON ALL USERS
+router.get('/sandbox', (req, res) => {
   User.find({}, (error, allUsers) => {
     res.send(allUsers);
     // res.render('Index', { User: allUsers });
@@ -37,7 +40,7 @@ router.get('/new', (req, res) => {
 // // User SEED ROUTE
 // router.get('/seed', (req, res) => {
 //   User.create(seedData, (err, data) => {
-//     res.send(data);
+//     res.redirect('/user/sandbox');
 //   });
 // });
 
@@ -55,6 +58,47 @@ router.get('/:id/edit', (req, res) => {
     res.send(foundUser);
     // res.render('Edit', { user: foundUser });
   });
+});
+
+// MENU PLANNER ROUTE
+router.get('/menu_planner/:userId', (req, res) => {
+  const userId = req.params.userId;
+  User.findById(userId)
+    .populate({
+      path: 'blueprint',
+      populate: {
+        path: 'body_type',
+        model: 'BodyType',
+      },
+    })
+    .exec(async (error, foundUser) => {
+      const foodItems = await Food.find({}, (error, foodItems) => {
+        // console.log(foodItems);
+      });
+
+      const menuItems = await Menu.find(
+        { user: userId },
+        (error, menuItems) => {
+          // console.log(menuItems);
+        }
+      );
+
+      const mealItems = await Meal.find(
+        { user: userId },
+        (error, mealItems) => {
+          // console.log(mealItems);
+        }
+      );
+
+      // console.log(foundUser);
+      res.render('User_Index', {
+        user: foundUser,
+
+        food: foodItems,
+        menu: menuItems,
+        meal: mealItems,
+      });
+    });
 });
 
 /*******************************

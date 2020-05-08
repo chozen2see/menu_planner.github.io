@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 // create Blueprint Schema
 const blueprintSchema = new Schema(
   {
-    body_type: { type: String },
+    body_type: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'BodyType',
+    },
     gender: { type: String },
     menu: [
       {

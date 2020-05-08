@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // DATA
-const seedData = require('../models/seed/food.js');
+const seedData = require('../models/seed/bodytype.js');
 
 // MODEL
-const Food = require('../models/food.js'); // ./ used for relative path (not node_modules)
+const BodyType = require('../models/bodytype.js'); // ./ used for relative path (not node_modules)
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -21,29 +21,19 @@ const Food = require('../models/food.js'); // ./ used for relative path (not nod
  */
 
 // INDEX ROUTE
-router.get('/', (req, res) => {
-  // res.send('food');
-  Food.find({}, (error, allFood) => {
-    res.send(allFood);
-    // res.render('Index', { food: allFood });
+router.get('/sandbox', (req, res) => {
+  BodyType.find({}, (error, allBodyTypes) => {
+    res.send(allBodyTypes);
+    // res.render('Index', { User: allUsers });
   });
 });
 
-// // FOOD SEED ROUTE
+// // Body Type SEED ROUTE
 // router.get('/seed', (req, res) => {
-//   Food.create(seedData, (err, data) => {
+//   BodyType.create(seedData, (err, data) => {
 //     res.send(data);
 //   });
 // });
-
-// FOOD SHOW ROUTE
-router.get('/:id', (req, res) => {
-  Food.findById(req.params.id, (error, foundFood) => {
-    // console.log(foundFood);
-    res.send(foundFood);
-    // res.render('Show', { food: foundFood });
-  });
-});
 
 /*******************************
  * Functional Routes - perform functions in the browser (http verb)

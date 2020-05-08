@@ -1,0 +1,224 @@
+:root {
+  --muted-orange: #fe9a12;
+  --muted-blue: #1aa5bf;
+  --muted-green: #7ecc77;
+
+  --darker-orange: #fe881e;
+  --darker-blue: #64acc5;
+  --darker-green: #679f16;
+
+  --alt-orange: #ff7b17;
+  --alt-blue: #129dbc;
+  --alt-green: #e2dc16;
+
+  --yellow-gold: #ffaa00;
+  --yellow-brown: #593a25;
+  --yellow-green: #9aac1a;
+  --yellow-blue: #2f4858;
+  --yellow-teal: #006673;
+  --yellow-black: #000;
+
+  --door-blue: #0a1f4e;
+  --door-beige: #f1cba7;
+  --door-light-blue: #63a7be;
+
+  --door-orange: #fc6935;
+  --door-green: #8fa96a;
+  --door-medium-blue: #037192;
+}
+
+.mp-bg-gold {
+  background-color: var(--yellow-gold);
+}
+
+.mp-bg-brown {
+  background-color: var(--yellow-brown);
+}
+
+.mp-bg-green {
+  background-color: var(--door-green);
+}
+
+.mp-bg-blue {
+  background-color: var(--door-medium-blue);
+}
+
+.mp-bg-orange {
+  background-color: var(--door-orange);
+}
+
+.mp-bg-teal {
+  background-color: var(--yellow-teal);
+}
+
+.mp-bg-black {
+  background-color: var(--yellow-black);
+}
+
+body {
+  color: var(--door-blue);
+}
+
+div {
+  /* border: 2px solid var(--door-blue); */
+}
+
+h1 {
+  padding: 0 1.5%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 97%;
+  height: 95%;
+  margin: 0 auto;
+  border: 2px solid var(--door-blue);
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.user_panel {
+  flex: 0.2;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  min-width: 300px;
+}
+
+.user_top {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_photo {
+  flex: 0.5;
+  border: 2px solid var(--door-blue);
+  max-width: 200px;
+  text-align: center;
+  margin: 15px auto;
+  padding: 15px;
+}
+
+.btn_group {
+  flex: 0.4;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 10px 2%;
+  /* border: 2px solid var(--door-blue); */
+}
+
+.btn {
+  min-width: 115px;
+  height: 35px;
+  border-color: var(--door-blue);
+  margin: 0 10px;
+  font-size: 1.2em;
+}
+
+.btn:hover {
+  background-color: var(--yellow-gold);
+}
+
+.user_info {
+  margin: 15px auto;
+  font-size: 1.2em;
+}
+
+.menu_planner {
+  flex: 0.79;
+  /* border: 1px solid lightgrey; */
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  min-width: 500px;
+  /* max-width: 700px; */
+}
+
+aside {
+  flex: 0.3;
+  border: 1px solid var(--door-blue);
+  font-size: 1.1em;
+}
+
+aside:nth-child(2) {
+  margin: 2% 0;
+}
+
+.aside_header {
+  display: flex;
+  border-bottom: 2px solid var(--door-medium-blue);
+}
+
+.aside_header_title {
+  flex: 0.3;
+  padding: 0 1%;
+  display: flex;
+  /* vertical-align: text-bottom; */
+}
+
+.aside_header_title_menus,
+.aside_header_title_meals,
+.aside_header_title_food {
+  font-size: 1.1em;
+}
+
+.addBtn {
+  cursor: pointer;
+  margin: 12px 0 15px 10px;
+}
+
+.food_selection {
+  margin-left: 15px;
+  height: 30px;
+  width: 175px;
+  align-self: center;
+}
+
+.aside_header_center {
+  flex: 0.5;
+  align-self: center;
+  text-align: left;
+}
+
+.aside_header_seeAll {
+  flex: 0.2;
+  align-self: center;
+  /* margin-top: 25px;*/
+  text-align: right;
+  padding-right: 15px;
+}
+
+.aside_body {
+  display: flex;
+
+  padding: 15px;
+  overflow-x: auto;
+}
+
+.aside_body a {
+  text-decoration: none;
+}
+
+.card {
+  margin: 15px;
+  padding: 10px;
+  width: 175px;
+  height: 150px;
+  font-size: 1.1em;
+}
+
+.card_menu_item:hover {
+  background-color: var(--door-orange);
+  color: whitesmoke;
+}
+
+.card_meal_item:hover {
+  background-color: var(--door-medium-blue);
+  color: whitesmoke;
+}
+
+.card_food_item:hover {
+  background-color: var(--door-green);
+}

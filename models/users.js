@@ -5,17 +5,19 @@ const Schema = mongoose.Schema;
 // create User Schema
 const userSchema = new Schema(
   {
-    username: { type: String, required: true, maxlength: 30 },
+    name: { type: String, required: true, maxlength: 30 },
+
+    activeSession: { type: Boolean },
+
     blueprint: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Blueprint',
     }, // A, B, C, D, E - Based on Body Type Quiz
-    // menu_planner: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Menu',
-    //   },
-    // ],
+
+    height: { type: Number }, // in inches
+    startingWeight: { type: Number }, // in lbs
+    currentWeight: { type: Number }, // in lbs
+    goalWeight: { type: Number }, // in lbs
   },
   { timestamps: true } // add a timestamp to each document
 );

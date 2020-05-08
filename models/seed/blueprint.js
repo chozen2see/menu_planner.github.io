@@ -1,7 +1,7 @@
 module.exports = [
   {
-    body_type: 'B', // A, B, C, D, E - Based on Body Type Quiz
-    body_type: 'B',
+    // B - Female
+    body_type: '5eb4edcad8d3f80c3a2ca5d1', // A, B, C, D, E - Based on Body Type Quiz
     gender: 'Female',
     menu: [
       {
@@ -162,7 +162,8 @@ module.exports = [
   },
 
   {
-    body_type: 'A',
+    // A - Female
+    body_type: '5eb4edcad8d3f80c3a2ca5d0',
     gender: 'Female',
     menu: [
       {
@@ -343,7 +344,8 @@ module.exports = [
   },
 
   {
-    body_type: 'A',
+    // A - Male
+    body_type: '5eb4edcad8d3f80c3a2ca5d0',
     gender: 'Male',
     menu: [
       {
