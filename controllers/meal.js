@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 // DATA
 const seedData = require('../models/seed/meal.js');
@@ -39,12 +39,41 @@ router.get('/', (req, res) => {
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
-  res.send('New');
-  // res.render('New');
+  // res.send('New');
+
+  //const foundUser =
+  User.findOne({
+    // _id: currentUser._id,
+    activeSession: true,
+  }).exec(async (error, foundUser) => {
+    const proteinItems = await Food.find({ class: 'Protein' });
+
+    const carbohydrateItems = await Food.find({ class: 'Carbohydrate' });
+
+    const vegetableItems = await Food.find({ class: 'Vegetable' });
+
+    const fruitItems = await Food.find({ class: 'Fruit' });
+
+    res.render('Meal_New', {
+      user: foundUser,
+      proteinItems,
+      carbohydrateItems,
+      vegetableItems,
+      fruitItems,
+    });
+  });
 });
 
 // // MEAL SEED ROUTE
 // router.get('/seed', (req, res) => {
+//   const mySeed = [
+//     {
+//       name: 'No Meal Selected',
+//       type: 'Infinite',
+
+//       user: '5eb4f132074b980d26f9d6aa',
+//     },
+//   ];
 //   Meal.create(seedData, (err, data) => {
 //     res.send(data);
 //     console.log(data);
@@ -104,13 +133,15 @@ router.get('/:id/edit', (req, res) => {
  * Update: Updates a resource [PUT]
  */
 
-// CREATE ROUTE
+// CREATE ROUTE - 5eb69c30633d4e3c95590619
 router.post('/', (req, res) => {
+  console.log(req.body);
+
   // create new Meal document using a Model. based on Schema -> Model -> Document
   Meal.create(req.body, (error, createdMeal) => {
     // once created - respond to client with document from database
-    // res.send(createdMeal);
-    res.redirect('/');
+    console.log(createdMeal);
+    res.redirect('/meal');
   });
 });
 
@@ -134,57 +165,34 @@ router.put('/:id', (req, res) => {
     });
 
     if (req.body.protein === '') {
-      delete req.body.protein;
-      delete foundMeal.protein;
+      req.body.protein = '5eb69c30633d4e3c95590619';
     }
 
     if (req.body.fruit === '') {
-      delete req.body.fruit;
-      delete foundMeal.fruit;
+      req.body.fruit = '5eb69c30633d4e3c95590619';
     }
 
     if (req.body.carbohydrate === '') {
-      delete req.body.carbohydrate;
-      delete foundMeal.carbohydrate;
+      req.body.carbohydrate = '5eb69c30633d4e3c95590619';
     }
 
     if (req.body.vegetable === '') {
-      delete req.body.vegetable;
-      delete foundMeal.vegetable;
+      req.body.vegetable = '5eb69c30633d4e3c95590619';
     }
 
-    foundMeal = req.body;
-    foundMeal.user = foundUser.id;
+    req.body.user = foundUser.id;
 
-    // const updatedMeal = await foundMeal.save();
-    console.log(foundMeal);
+    console.log(req.body);
 
     const updated = await Meal.findByIdAndUpdate(
       req.params.id,
-      foundMeal,
+      req.body,
       (error, updatedMeal) => {
         console.log(updatedMeal);
         res.redirect(`/meal/${req.params.id}`);
       }
     );
   });
-
-  // if (req.body.protein !== '') {
-  //   req.body.protein = mongoose.Types.ObjectId(req.body.protein);
-  //   console.log(req.body);
-  // }
-  // Meal.findByIdAndUpdate(
-  //   req.params.id,
-  //   req.body,
-  //   async (error, updatedMeal) => {
-  //     const updatedUser = await updatedMeal.save();
-
-  //     console.log(updatedMeal);
-  //     res.redirect(`/meal/${req.params.id}`);
-  //   }
-  // );
-
-  // const foundMeal =  Meal.findOne()
 });
 
 // export the router

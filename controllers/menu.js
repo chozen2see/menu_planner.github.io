@@ -7,6 +7,7 @@ const seedData = require('../models/seed/menu.js');
 // MODEL
 const Menu = require('../models/menu.js'); // ./ used for relative path (not node_modules)
 const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
+const Meal = require('../models/meal.js'); // ./ used for relative path (not node_modules)
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -38,8 +39,16 @@ router.get('/', (req, res) => {
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
-  res.send('New');
-  // res.render('New');
+  Meal.find({}, async (error, allMeals) => {
+    // res.send(allMeals);
+    // find the current active user
+    const foundUser = await User.findOne({
+      // _id: currentUser._id,
+      activeSession: true,
+    });
+
+    res.render('Menu_New', { meal: allMeals, user: foundUser });
+  });
 });
 
 // // Menu SEED ROUTE
@@ -59,22 +68,45 @@ router.get('/:id', (req, res) => {
     })
     .exec(async (error, foundMenu) => {
       // console.log(foundMenu);
+
       // find the current active user
       const foundUser = await User.findOne({
         // _id: currentUser._id,
         activeSession: true,
       });
 
-      res.render('Menu_Show', { menu: foundMenu, user: foundUser });
+      res.render('Menu_Show', {
+        menu: foundMenu,
+
+        user: foundUser,
+      });
     });
 });
 
 // EDIT ROUTE
 router.get('/:id/edit', (req, res) => {
-  Menu.findById(req.params.id, (error, foundMenu) => {
-    res.send(foundMenu);
-    // res.render('Edit', { menu: foundMenu });
-  });
+  Menu.findById(req.params.id)
+    .populate({
+      path:
+        'breakfast morning_snack lunch afternoon_snack dinner evening_snack',
+      model: 'Meal',
+    })
+    .exec(async (error, foundMenu) => {
+      // res.send(foundMenu);
+      // find the current active user
+      const foundUser = await User.findOne({
+        // _id: currentUser._id,
+        activeSession: true,
+      });
+
+      const allMeals = await Meal.find({});
+
+      res.render('Menu_Edit', {
+        menu: foundMenu,
+        meal: allMeals,
+        user: foundUser,
+      });
+    });
 });
 
 /*******************************
@@ -91,7 +123,7 @@ router.post('/', (req, res) => {
   Menu.create(req.body, (error, createdMenu) => {
     // once created - respond to client with document from database
     // res.send(createdMenu);
-    res.redirect('/');
+    res.redirect('/menu');
   });
 });
 
@@ -106,7 +138,7 @@ router.delete('/:id', (req, res) => {
 // UPDATE ROUTE
 router.put('/:id', (req, res) => {
   Menu.findByIdAndUpdate(req.params.id, req.body, (error, updatedMenu) => {
-    res.redirect(`/${req.params.id}`);
+    res.redirect(`/menu/${req.params.id}`);
   });
 });
 

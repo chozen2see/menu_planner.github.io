@@ -42,4 +42,10 @@ module.exports = [
     fruit: '5eb0dbbed84912e14f6eb7f4',
     user: '5eb4f132074b980d26f9d6aa',
   },
+  {
+    name: 'No Meal Selected',
+    type: 'Infinite',
+
+    user: '5eb4f132074b980d26f9d6aa',
+  },
 ];

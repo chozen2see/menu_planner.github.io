@@ -47,7 +47,9 @@ class Meal_Edit extends React.Component {
                     id='protein'
                     name='protein'
                   >
-                    <option value=''>--SELECT A PROTEIN--</option>
+                    <option value='5eb69c30633d4e3c95590619'>
+                      --SELECT A PROTEIN--
+                    </option>
                     {proteinItems.map((item, index) => {
                       return (
                         <option
@@ -72,7 +74,9 @@ class Meal_Edit extends React.Component {
                     id='fruit_selection'
                     name='fruit'
                   >
-                    <option value=''>--SELECT A FRUIT--</option>
+                    <option value='5eb69c30633d4e3c95590619'>
+                      --SELECT A FRUIT--
+                    </option>
                     {fruitItems.map((item, index) => {
                       return (
                         <option
@@ -97,7 +101,9 @@ class Meal_Edit extends React.Component {
                     id='carbohydrate_selection'
                     name='carbohydrate'
                   >
-                    <option value=''>--SELECT A CARBOHYDRATE--</option>
+                    <option value='5eb69c30633d4e3c95590619'>
+                      --SELECT A CARBOHYDRATE--
+                    </option>
                     {carbohydrateItems.map((item, index) => {
                       return (
                         <option
@@ -123,7 +129,9 @@ class Meal_Edit extends React.Component {
                     id='vegetable_selection'
                     name='vegetable'
                   >
-                    <option value=''>--SELECT A VEGETABLE--</option>
+                    <option value='5eb69c30633d4e3c95590619'>
+                      --SELECT A VEGETABLE--
+                    </option>
                     {vegetableItems.map((item, index) => {
                       return (
                         <option
@@ -150,7 +158,7 @@ class Meal_Edit extends React.Component {
                       className='btn_meal w3-border w3-round-large'
                     />
                   </a>
-                  <form action=''>
+                  <form action={`/meal/${meal._id}?_method=DELETE`}>
                     <input
                       type='submit'
                       value='DELETE'

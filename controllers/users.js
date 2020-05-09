@@ -73,10 +73,8 @@ router.get('/menu_planner/:userId', (req, res) => {
           if (filter && filter !== 'ALL') {
             filteredFood = foodItems.filter((food) => {
               // true will add food to filteredfood
-              return (
-                food.class === filter
-                //
-              );
+              return food.class === filter;
+              //
             });
           } else {
             filteredFood = foodItems;

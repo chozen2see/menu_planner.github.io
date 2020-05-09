@@ -13,7 +13,7 @@ class User_New extends React.Component {
           <div className='user_container'>
             <div className='user_top'>
               <div className='user_title'>
-                <h2>User Profile</h2>
+                <h2>Add New User Profile</h2>
               </div>
               <div className='user_photo'>
                 <p>
