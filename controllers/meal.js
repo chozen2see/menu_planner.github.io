@@ -155,10 +155,10 @@ router.delete('/:id', (req, res) => {
 
 // UPDATE ROUTE
 router.put('/:id', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   Meal.findOne({ _id: req.params.id }).exec(async (error, foundMeal) => {
-    console.log(foundMeal);
+    // console.log(foundMeal);
 
     const foundUser = await User.findOne({
       activeSession: true,
@@ -182,7 +182,7 @@ router.put('/:id', (req, res) => {
 
     req.body.user = foundUser.id;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const updated = await Meal.findByIdAndUpdate(
       req.params.id,
