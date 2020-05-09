@@ -23,11 +23,13 @@ Loosely based off of the Six Week Body Makeover made popular by the Late Michael
 
 ## Unsolved Problems / Areas for Improvement
 
--- Quiz to Determine Body Type
--- Responsive Design Principles
--- User Interface with Login Capability (Known Issue when creating new user)
--- Interacting with Nested Sub Documents
--- Deployment to Heroku
+> > Quiz to Determine Body Type
+> > API to find recipes using the food items selected for a meal
+> > Upload image for user profile
+> > Responsive Design Principles
+> > User Interface with Login Capability (Known Issue when creating new user)
+> > Interacting with Nested Sub Documents
+> > Deployment to Heroku
 
 ## Project link
 
