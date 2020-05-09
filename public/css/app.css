@@ -284,6 +284,18 @@ aside:nth-child(2) {
   background-color: var(--door-green);
 }
 
+.menu_container,
+.meal_container {
+  padding: 25px;
+  font-size: 1.4em;
+  border: 1px solid lightgrey;
+}
+
+.meal_title {
+  width: 100%;
+  border-bottom: 2px solid var(--door-blue);
+}
+
 footer {
   display: none;
   text-align: center;

@@ -63,6 +63,8 @@ router.get('/:id/edit', (req, res) => {
 // USER MENU PLANNER SHOW ROUTE
 router.get('/menu_planner/:userId', (req, res) => {
   const userId = req.params.userId;
+  const filter = req.query.filter;
+
   User.findById(userId)
     .populate({
       path: 'blueprint',
@@ -72,9 +74,25 @@ router.get('/menu_planner/:userId', (req, res) => {
       },
     })
     .exec(async (error, foundUser) => {
-      const foodItems = await Food.find({}, (error, foodItems) => {
-        // console.log(foodItems);
-      });
+      let filteredFood;
+      try {
+        const foodItems = await Food.find({}, (error, foodItems) => {
+          // console.log(foodItems);
+          if (filter && filter !== 'ALL') {
+            filteredFood = foodItems.filter((food) => {
+              // true will add food to filteredfood
+              return (
+                food.class === filter
+                //
+              );
+            });
+          } else {
+            filteredFood = foodItems;
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
       const menuItems = await Menu.find(
         { user: userId },
@@ -94,9 +112,10 @@ router.get('/menu_planner/:userId', (req, res) => {
       res.render('User_Index', {
         user: foundUser,
 
-        food: foodItems,
+        food: filteredFood, //foodItems,
         menu: menuItems,
         meal: mealItems,
+        filter,
       });
     });
 });

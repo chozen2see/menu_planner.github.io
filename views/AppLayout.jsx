@@ -23,7 +23,7 @@ class AppLayout extends React.Component {
           />
           <link rel='stylesheet' href='/css/app.css' />
 
-          {/* <script src='/js/functions.js'></script> */}
+          <script src='/js/app.js'></script>
           <title>Menu Planner</title>
         </head>
         <body>
@@ -36,8 +36,8 @@ class AppLayout extends React.Component {
             <p className='greeting'>Welcome, {username}!</p> */}
             <h2>{username} Menu Planner</h2>
             <nav>
-              <a href='/meal/new'>Create Meal</a>
-              <a href='/menu/new'>Create Menu</a>
+              {/* <a href='/meal/new'>Create Meal</a>
+              <a href='/menu/new'>Create Menu</a> */}
               <a href={`/user/menu_planner/${this.props.currentUser.id}`}>
                 View Menu Planner
               </a>

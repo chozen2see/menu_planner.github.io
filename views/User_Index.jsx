@@ -3,7 +3,7 @@ const AppLayout = require('./AppLayout');
 
 class User_Index extends React.Component {
   render() {
-    const { user, food, menu, meal } = this.props;
+    const { user, food, menu, meal, filter } = this.props;
     // console.log(user);
 
     // render method must return something...
@@ -137,16 +137,20 @@ class User_Index extends React.Component {
               <div className='aside_header mp-bg-green'>
                 <div className='aside_header_title'>
                   <p className='aside_header_title_food'>FOOD</p>
-
-                  <select className='food_selection'>
-                    <option selected value='ALL'>
-                      ALL
-                    </option>
-                    <option value='Protein'>Protein</option>
-                    <option value='Carbohydrate'>Carbohydrate</option>
-                    <option value='Fruit'>Fruit</option>
-                    <option value='Vegetable'>Vegetable</option>
-                  </select>
+                  <form action={`/user/menu_planner/${user.id}`} method='get'>
+                    <select
+                      className='food_selection'
+                      id='food_selection'
+                      name='filter'
+                    >
+                      <option value='ALL'>ALL</option>
+                      <option value='Protein'>Protein</option>
+                      <option value='Carbohydrate'>Carbohydrate</option>
+                      <option value='Fruit'>Fruit</option>
+                      <option value='Vegetable'>Vegetable</option>
+                    </select>
+                    <input type='submit' value='Filter' />
+                  </form>
                 </div>
                 <div className='aside_header_center'></div>
                 <div className='aside_header_seeAll'>

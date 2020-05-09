@@ -51,7 +51,7 @@ router.get('/:id', (req, res) => {
       model: 'Meal',
     })
     .exec(async (error, foundMenu) => {
-      console.log(foundMenu);
+      // console.log(foundMenu);
       // find the current active user
       const foundUser = await User.findOne({
         // _id: currentUser._id,

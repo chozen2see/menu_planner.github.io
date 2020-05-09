@@ -45,15 +45,17 @@ router.get('/new', (req, res) => {
 
 // Meal SHOW ROUTE
 router.get('/:id', (req, res) => {
-  Meal.findById(req.params.id, async (error, foundMeal) => {
-    // find the current active user
-    const foundUser = await User.findOne({
-      // _id: currentUser._id,
-      activeSession: true,
-    });
+  Meal.findById(req.params.id)
+    .populate({ path: 'protein fruit vegetable carbohydrate', model: 'Food' })
+    .exec(async (error, foundMeal) => {
+      // find the current active user
+      const foundUser = await User.findOne({
+        // _id: currentUser._id,
+        activeSession: true,
+      });
 
-    res.render('Meal_Show', { meal: foundMeal, user: foundUser });
-  });
+      res.render('Meal_Show', { meal: foundMeal, user: foundUser });
+    });
 });
 
 // EDIT ROUTE
