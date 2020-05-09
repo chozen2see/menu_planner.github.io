@@ -23,9 +23,16 @@ const User = require('../models/users.js'); // ./ used for relative path (not no
 
 // INDEX ROUTE
 router.get('/', (req, res) => {
-  Menu.find({}, (error, allMenus) => {
-    res.send(allMenus);
-    // res.render('Index', { Menu: allMenus });
+  Menu.find({}, async (error, allMenus) => {
+    // res.send(allMenus);
+
+    // find the current active user
+    const foundUser = await User.findOne({
+      // _id: currentUser._id,
+      activeSession: true,
+    });
+
+    res.render('Menu_Index', { menu: allMenus, user: foundUser });
   });
 });
 

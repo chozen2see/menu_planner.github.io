@@ -4,7 +4,6 @@ const AppLayout = require('./AppLayout');
 class User_Index extends React.Component {
   render() {
     const { user, food, menu, meal, filter } = this.props;
-    // console.log(user);
 
     // render method must return something...
     return (
@@ -23,11 +22,13 @@ class User_Index extends React.Component {
                 </p>
               </div>
               <div className='btn_group'>
-                <input
-                  type='button'
-                  value='EDIT'
-                  className='btn  w3-border w3-round-large'
-                />
+                <a href={`../${user.id}/edit`}>
+                  <input
+                    type='button'
+                    value='EDIT'
+                    className='btn  w3-border w3-round-large'
+                  />
+                </a>
                 <form action=''>
                   <input
                     type='submit'
@@ -64,7 +65,13 @@ class User_Index extends React.Component {
               <div className='aside_header mp-bg-orange'>
                 <div className='aside_header_title'>
                   <p className='aside_header_title_menus'>MENUS</p>
-                  <input type='button' value='+' className='w3-circle addBtn' />
+                  <a href='/menu/new'>
+                    <input
+                      type='button'
+                      value='+'
+                      className='w3-circle addBtn'
+                    />
+                  </a>
                 </div>
                 <div className='aside_header_center'>
                   {/* <input type='button' value='+' className='w3-circle addBtn' /> */}
@@ -88,7 +95,6 @@ class User_Index extends React.Component {
                         <p className='menu_list_name w3-container'>
                           {menuItem.name}
                         </p>
-                        {/* <p className='menu_list_type'>{menuItem.date}</p> */}
                       </div>
                     </a>
                   );
@@ -100,7 +106,13 @@ class User_Index extends React.Component {
               <div className='aside_header mp-bg-blue'>
                 <div className='aside_header_title'>
                   <p className='aside_header_title_meals'>MEALS</p>
-                  <input type='button' value='+' className='w3-circle addBtn' />
+                  <a href='/meal/new'>
+                    <input
+                      type='button'
+                      value='+'
+                      className='w3-circle addBtn'
+                    />
+                  </a>
                 </div>
                 <div className='aside_header_center'>
                   {/* <a href='/meal/new' className='addBtn'>
@@ -137,17 +149,46 @@ class User_Index extends React.Component {
               <div className='aside_header mp-bg-green'>
                 <div className='aside_header_title'>
                   <p className='aside_header_title_food'>FOOD</p>
-                  <form action={`/user/menu_planner/${user.id}`} method='get'>
+                  <form
+                    action={`/user/menu_planner/${user.id}`}
+                    method='get'
+                    className='form_food_selection'
+                  >
                     <select
                       className='food_selection'
                       id='food_selection'
                       name='filter'
                     >
-                      <option value='ALL'>ALL</option>
-                      <option value='Protein'>Protein</option>
-                      <option value='Carbohydrate'>Carbohydrate</option>
-                      <option value='Fruit'>Fruit</option>
-                      <option value='Vegetable'>Vegetable</option>
+                      <option
+                        selected={filter === 'ALL' ? 'true' : ''}
+                        value='ALL'
+                      >
+                        ALL
+                      </option>
+                      <option
+                        selected={filter === 'Protein' ? 'true' : ''}
+                        value='Protein'
+                      >
+                        Protein
+                      </option>
+                      <option
+                        selected={filter === 'Carbohydrate' ? 'true' : ''}
+                        value='Carbohydrate'
+                      >
+                        Carbohydrate
+                      </option>
+                      <option
+                        selected={filter === 'Fruit' ? 'true' : ''}
+                        value='Fruit'
+                      >
+                        Fruit
+                      </option>
+                      <option
+                        selected={filter === 'Vegetable' ? 'true' : ''}
+                        value='Vegetable'
+                      >
+                        Vegetable
+                      </option>
                     </select>
                     <input type='submit' value='Filter' />
                   </form>
@@ -172,16 +213,10 @@ class User_Index extends React.Component {
                         <p className='food_list_name w3-container'>
                           {foodItem.name}
                         </p>
-                        {/* <p className='food_list_type w3-container'>
-                          Type: {foodItem.type}
-                        </p> */}
                       </div>
                     </a>
                   );
                 })}
-
-                {/* <div className='card card_food_item'>FOOD 2</div>
-                <div className='card card_food_item'>FOOD 3</div> */}
               </div>
             </aside>
           </div>

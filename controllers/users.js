@@ -33,8 +33,8 @@ router.get('/sandbox', (req, res) => {
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
-  res.send('New');
-  // res.render('New');
+  // res.send('New');
+  res.render('User_New');
 });
 
 // // User SEED ROUTE
@@ -47,18 +47,10 @@ router.get('/new', (req, res) => {
 // // User SHOW ROUTE
 // router.get('/:id', (req, res) => {
 //   User.findById(req.params.id, (error, foundUser) => {
-//     res.send(foundUser);
-//     // res.render('Show', { user: foundUser });
+//     // res.send(foundUser);
+//     res.render('User_Show', { user: foundUser });
 //   });
 // });
-
-// EDIT ROUTE
-router.get('/:id/edit', (req, res) => {
-  User.findById(req.params.id, (error, foundUser) => {
-    res.send(foundUser);
-    // res.render('Edit', { user: foundUser });
-  });
-});
 
 // USER MENU PLANNER SHOW ROUTE
 router.get('/menu_planner/:userId', (req, res) => {
@@ -120,6 +112,22 @@ router.get('/menu_planner/:userId', (req, res) => {
     });
 });
 
+// EDIT ROUTE
+router.get('/:id/edit', (req, res) => {
+  User.findById(req.params.id)
+    .populate({
+      path: 'blueprint',
+      populate: {
+        path: 'body_type',
+        model: 'BodyType',
+      },
+    })
+    .exec(async (error, foundUser) => {
+      // res.send(foundUser);
+      res.render('User_Edit', { user: foundUser });
+    });
+});
+
 /*******************************
  * Functional Routes - perform functions in the browser (http verb)
  * ORDER DOESN'T MATTER BECAUSE DIFF HTTP VERBS
@@ -134,14 +142,20 @@ router.post('/', (req, res) => {
   User.create(req.body, (error, createdUser) => {
     // once created - respond to client with document from database
     // res.send(createdUser);
-    res.redirect('/');
+    res.redirect('/user/sandbox');
   });
+});
+
+router.delete('/:id', (req, res) => {
+  User.findByIdAndRemove(req.params.id, (error, removedUser) => {
+    res.redirect('/user/sandbox'); //redirect back to index route
+  }); //remove the item from the array
 });
 
 // UPDATE ROUTE
 router.put('/:id', (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body, (error, updatedUser) => {
-    res.redirect(`/${req.params.id}`);
+    res.redirect(`/user/menu_planner/${req.params.id}`);
   });
 });
 

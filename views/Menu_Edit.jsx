@@ -1,7 +1,7 @@
 const React = require('react');
 const AppLayout = require('./AppLayout');
 
-class Menu_Show extends React.Component {
+class Menu_Edit extends React.Component {
   render() {
     const { menu, user } = this.props;
     // console.log(menu);
@@ -77,4 +77,4 @@ class Menu_Show extends React.Component {
   }
 }
 
-module.exports = Menu_Show;
+module.exports = Menu_Edit;

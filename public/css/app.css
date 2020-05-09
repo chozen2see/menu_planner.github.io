@@ -169,6 +169,27 @@ nav a:hover {
   background-color: var(--yellow-gold);
 }
 
+.btn_user,
+.btn_menu,
+.btn_meal {
+  padding: 20px;
+}
+
+.btn_user:hover {
+  /* color: whitesmoke; */
+  background-color: var(--yellow-gold);
+}
+
+.btn_menu:hover {
+  /* color: whitesmoke; */
+  background-color: var(--door-orange);
+}
+
+.btn_meal:hover {
+  color: whitesmoke;
+  background-color: var(--door-medium-blue);
+}
+
 .user_info {
   margin: 3px auto;
   font-size: 1.2em;
@@ -284,16 +305,68 @@ aside:nth-child(2) {
   background-color: var(--door-green);
 }
 
+.food_selection {
+  margin: 15px 15px 0 15px;
+}
+
+.user_container,
 .menu_container,
-.meal_container {
+.meal_container,
+.food_container {
   padding: 25px;
   font-size: 1.4em;
   border: 1px solid lightgrey;
 }
 
-.meal_title {
+.user_title,
+.menu_title,
+.meal_title,
+.food_title {
   width: 100%;
   border-bottom: 2px solid var(--door-blue);
+  padding: 5px 10px;
+}
+
+.user_title {
+  background-color: var(--yellow-gold);
+}
+
+.menu_title {
+  background-color: var(--door-orange);
+}
+
+.meal_title {
+  color: whitesmoke;
+  background-color: var(--door-medium-blue);
+}
+
+.food_title {
+  background-color: var(--door-green);
+}
+
+.menu_details,
+.meal_details,
+.food_details {
+  padding: 10px;
+  border: 2px solid lightgrey;
+}
+
+.menu_breakfast,
+.menu_morning_snack,
+.menu_lunch,
+.menu_afternoon_snack,
+.menu_dinner,
+.menu_evening_snack {
+  border-bottom: 2px solid lightgrey;
+}
+
+.menu_evening_snack {
+  margin-bottom: 25px;
+}
+
+.list_all {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 footer {

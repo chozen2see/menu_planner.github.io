@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 // DATA
 const seedData = require('../models/seed/meal.js');
@@ -7,6 +8,7 @@ const seedData = require('../models/seed/meal.js');
 // MODEL
 const Meal = require('../models/meal.js'); // ./ used for relative path (not node_modules)
 const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
+const Food = require('../models/food.js'); // ./ used for relative path (not node_modules)
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -23,9 +25,15 @@ const User = require('../models/users.js'); // ./ used for relative path (not no
 
 // INDEX ROUTE
 router.get('/', (req, res) => {
-  Meal.find({}, (error, allMeals) => {
-    res.send(allMeals);
-    // res.render('Index', { meal: allMeals });
+  Meal.find({}, async (error, allMeals) => {
+    // res.send(allMeals);
+    // find the current active user
+    const foundUser = await User.findOne({
+      // _id: currentUser._id,
+      activeSession: true,
+    });
+
+    res.render('Meal_Index', { meal: allMeals, user: foundUser });
   });
 });
 
@@ -60,10 +68,32 @@ router.get('/:id', (req, res) => {
 
 // EDIT ROUTE
 router.get('/:id/edit', (req, res) => {
-  Meal.findById(req.params.id, (error, foundMeal) => {
-    res.send(foundMeal);
-    // res.render('Edit', { meal: foundMeal });
-  });
+  Meal.findById(req.params.id)
+    .populate({ path: 'protein fruit vegetable carbohydrate', model: 'Food' })
+    .exec(async (error, foundMeal) => {
+      // find the current active user
+      const foundUser = await User.findOne({
+        // _id: currentUser._id,
+        activeSession: true,
+      });
+
+      const proteinItems = await Food.find({ class: 'Protein' });
+
+      const carbohydrateItems = await Food.find({ class: 'Carbohydrate' });
+
+      const vegetableItems = await Food.find({ class: 'Vegetable' });
+
+      const fruitItems = await Food.find({ class: 'Fruit' });
+
+      res.render('Meal_Edit', {
+        meal: foundMeal,
+        user: foundUser,
+        proteinItems,
+        carbohydrateItems,
+        vegetableItems,
+        fruitItems,
+      });
+    });
 });
 
 /*******************************
@@ -94,9 +124,67 @@ router.delete('/:id', (req, res) => {
 
 // UPDATE ROUTE
 router.put('/:id', (req, res) => {
-  Meal.findByIdAndUpdate(req.params.id, req.body, (error, updatedMeal) => {
-    res.redirect(`/${req.params.id}`);
+  console.log(req.body);
+
+  Meal.findOne({ _id: req.params.id }).exec(async (error, foundMeal) => {
+    console.log(foundMeal);
+
+    const foundUser = await User.findOne({
+      activeSession: true,
+    });
+
+    if (req.body.protein === '') {
+      delete req.body.protein;
+      delete foundMeal.protein;
+    }
+
+    if (req.body.fruit === '') {
+      delete req.body.fruit;
+      delete foundMeal.fruit;
+    }
+
+    if (req.body.carbohydrate === '') {
+      delete req.body.carbohydrate;
+      delete foundMeal.carbohydrate;
+    }
+
+    if (req.body.vegetable === '') {
+      delete req.body.vegetable;
+      delete foundMeal.vegetable;
+    }
+
+    foundMeal = req.body;
+    foundMeal.user = foundUser.id;
+
+    // const updatedMeal = await foundMeal.save();
+    console.log(foundMeal);
+
+    const updated = await Meal.findByIdAndUpdate(
+      req.params.id,
+      foundMeal,
+      (error, updatedMeal) => {
+        console.log(updatedMeal);
+        res.redirect(`/meal/${req.params.id}`);
+      }
+    );
   });
+
+  // if (req.body.protein !== '') {
+  //   req.body.protein = mongoose.Types.ObjectId(req.body.protein);
+  //   console.log(req.body);
+  // }
+  // Meal.findByIdAndUpdate(
+  //   req.params.id,
+  //   req.body,
+  //   async (error, updatedMeal) => {
+  //     const updatedUser = await updatedMeal.save();
+
+  //     console.log(updatedMeal);
+  //     res.redirect(`/meal/${req.params.id}`);
+  //   }
+  // );
+
+  // const foundMeal =  Meal.findOne()
 });
 
 // export the router
