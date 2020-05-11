@@ -158,7 +158,10 @@ class Meal_Edit extends React.Component {
                       className='btn_meal w3-border w3-round-large'
                     />
                   </a>
-                  <form action={`/meal/${meal._id}?_method=DELETE`}>
+                  <form
+                    action={`/meal/${meal.id}?_method=DELETE`}
+                    method='POST'
+                  >
                     <input
                       type='submit'
                       value='DELETE'

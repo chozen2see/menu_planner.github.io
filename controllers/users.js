@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+// JS
+// import * as Utils from '../public/js/app.js';
+// const Utils = require('../public/js/app.js');
+
 // DATA
 const seedData = require('../models/seed/users.js');
 
@@ -73,10 +77,18 @@ router.get('/menu_planner/:userId', (req, res) => {
           if (filter && filter !== 'ALL') {
             filteredFood = foodItems.filter((food) => {
               // true will add food to filteredfood
-              return food.class === filter;
+              return food.class === filter && food.name !== 'No Food Selected';
               //
             });
           } else {
+            noFoodSelectedIndex = foodItems.findIndex(
+              (food) => food.name === 'No Food Selected'
+            );
+            // console.log(foodItems.length);
+            // console.log(foodItems[noFoodSelectedIndex]);
+            foodItems.splice(62, 1);
+
+            // foodItems.sort(Utils.nameByAlpha);
             filteredFood = foodItems;
           }
         });
@@ -95,6 +107,11 @@ router.get('/menu_planner/:userId', (req, res) => {
         { user: userId },
         (error, mealItems) => {
           // console.log(mealItems);
+          filteredMeal = mealItems.filter((meal) => {
+            // true will add food to filteredfood
+            return meal.name !== 'No Meal Selected';
+            //
+          });
         }
       );
 
@@ -104,7 +121,7 @@ router.get('/menu_planner/:userId', (req, res) => {
 
         food: filteredFood, //foodItems,
         menu: menuItems,
-        meal: mealItems,
+        meal: filteredMeal,
         filter,
       });
     });

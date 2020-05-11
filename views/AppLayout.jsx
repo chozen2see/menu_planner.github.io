@@ -23,7 +23,6 @@ class AppLayout extends React.Component {
           />
           <link rel='stylesheet' href='/css/app.css' />
 
-          <script src='/js/app.js'></script>
           <title>Menu Planner</title>
         </head>
         <body>
@@ -47,6 +46,7 @@ class AppLayout extends React.Component {
           <footer>
             <p className='copyright'>Copyright Menu Planner &copy; 2020</p>
           </footer>
+          {/* <script src='../js/app.js'></script> */}
         </body>
       </html>
     );

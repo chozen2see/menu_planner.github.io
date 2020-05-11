@@ -148,9 +148,12 @@ router.post('/', (req, res) => {
 // method override, overrides post route and sends it to this delete route
 // DELETE ROUTE
 router.delete('/:id', (req, res) => {
+  // Meal.findByIdAndRemove(req.params.id, (error, removedMeal) => {
+  //   res.redirect('/'); //redirect back to index route
+  // }); //remove the item from the array
   Meal.findByIdAndRemove(req.params.id, (error, removedMeal) => {
-    res.redirect('/'); //redirect back to index route
-  }); //remove the item from the array
+    res.redirect('/meal'); //redirect back to index route
+  });
 });
 
 // UPDATE ROUTE

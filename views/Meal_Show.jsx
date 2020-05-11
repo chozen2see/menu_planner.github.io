@@ -59,7 +59,7 @@ class Meal_Show extends React.Component {
                     className='btn_meal w3-border w3-round-large'
                   />
                 </a>
-                <form action=''>
+                <form action={`/meal/${meal.id}?_method=DELETE`} method='POST'>
                   <input
                     type='submit'
                     value='DELETE'

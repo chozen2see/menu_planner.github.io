@@ -201,8 +201,8 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  min-width: 500px;
-  /* max-width: 700px; */
+  min-width: 600px;
+  /* max-width: 800px; */
 }
 
 aside {
@@ -221,7 +221,7 @@ aside:nth-child(2) {
 }
 
 .aside_header_title {
-  flex: 0.3;
+  flex: 0.9;
   padding: 0 1%;
   display: flex;
   /* vertical-align: text-bottom; */
@@ -333,11 +333,13 @@ aside:nth-child(2) {
 
 .menu_title {
   background-color: var(--door-orange);
+  display: flex;
 }
 
 .meal_title {
   color: whitesmoke;
   background-color: var(--door-medium-blue);
+  display: flex;
 }
 
 .food_title {
@@ -367,6 +369,10 @@ aside:nth-child(2) {
 .list_all {
   display: flex;
   flex-wrap: wrap;
+}
+
+input[type='text'] {
+  width: 100%;
 }
 
 footer {

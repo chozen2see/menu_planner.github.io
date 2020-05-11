@@ -10,12 +10,22 @@ class Menu_Edit extends React.Component {
         <div className='container'>
           <div className='menu_container'>
             <div className='menu_title'>
-              <h2>Menu: {menu.name}</h2>
+              <h2>Edit Menu:</h2>
+              <a href='/menu/new'>
+                <input type='button' value='+' className='w3-circle addBtn' />
+              </a>
             </div>
             <div className='menu_details'>
               <form action={`/menu/${menu.id}?_method=PUT`} method='post'>
                 {/* NOTE: the form is pre-populated with values for the server */}
                 <div className='menu_breakfast'>
+                  <h3>Name</h3>
+                  <input
+                    type='text'
+                    name='name'
+                    id='name'
+                    defaultValue={menu.name}
+                  />
                   <h3 className='menu_breakfast_title'>Breakfast</h3>
                   {/* menu.breakfast.id */}
                   <select

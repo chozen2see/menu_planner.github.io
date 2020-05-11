@@ -11,6 +11,10 @@ class Meal_Index extends React.Component {
         <div className='container'>
           <div className='meal_title'>
             <h2>All Meals</h2>
+
+            <a href='/meal/new'>
+              <input type='button' value='+' className='w3-circle addBtn' />
+            </a>
           </div>
           <div className='list_all'>
             {meal.map((mealItem, index) => {

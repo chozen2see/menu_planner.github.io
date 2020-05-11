@@ -15,15 +15,6 @@ class User_New extends React.Component {
               <div className='user_title'>
                 <h2>Add New User Profile</h2>
               </div>
-              <div className='user_photo'>
-                <p>
-                  <img
-                    src='../../images/user-orange.png'
-                    alt='User Icon'
-                    className='userImage'
-                  />
-                </p>
-              </div>
             </div>
             <form action={`/user`} method='POST'>
               {/* NOTE: the form is pre-populated with values for the server */}
