@@ -6,14 +6,15 @@ const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 /**********************
  * Mongoose Connection
  **********************/
 
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb://localhost:27017/menuplanner';
+const mongoURI =
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/menuplanner';
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
