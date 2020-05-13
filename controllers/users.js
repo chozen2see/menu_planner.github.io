@@ -41,12 +41,12 @@ router.get('/new', (req, res) => {
   res.render('User_New');
 });
 
-// User SEED ROUTE
-router.get('/seed', (req, res) => {
-  User.create(seedData, (err, data) => {
-    res.redirect('/user/sandbox');
-  });
-});
+// // User SEED ROUTE
+// router.get('/seed', (req, res) => {
+//   User.create(seedData, (err, data) => {
+//     res.redirect('/user/sandbox');
+//   });
+// });
 
 // // User SHOW ROUTE
 // router.get('/:id', (req, res) => {

@@ -36,20 +36,12 @@ router.get('/', (req, res) => {
   });
 });
 
-// // FOOD SEED ROUTE
-// router.get('/seed', (req, res) => {
-//   // const mySeed = [
-//   //   {
-//   //     name: 'No Food Selected',
-//   //     type: 'A', // A , B, C
-//   //     class: 'Protein', // Protein, Carbohydrate, Fruit, Vegetable
-//   //     createdBy: '5eb215f2dfefc7efd38586ed',
-//   //   },
-//   // ];
-//   Food.create(seedData, (err, data) => {
-//     res.send(data);
-//   });
-// });
+// FOOD SEED ROUTE
+router.get('/seed', (req, res) => {
+  Food.create(seedData, (err, data) => {
+    res.send(data);
+  });
+});
 
 // FOOD SHOW ROUTE
 router.get('/:id', (req, res) => {
