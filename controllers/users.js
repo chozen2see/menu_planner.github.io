@@ -61,6 +61,13 @@ router.get('/menu_planner/:userId', (req, res) => {
   const userId = req.params.userId;
   const filter = req.query.filter;
 
+  User.findByIdAndUpdate(
+    { _id: userId },
+    { blueprint: '5ebc8ba7c46bb20017dbdf29' }
+  ).exec((error, foundUser) => {
+    console.log('updated userId:', userId);
+  });
+
   User.findById(userId)
     .populate({
       path: 'blueprint',
