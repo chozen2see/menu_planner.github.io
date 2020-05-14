@@ -38,11 +38,9 @@ router.get('/', (req, res) => {
     noMealSelectedIndex = allMeals.findIndex(
       (meal) => meal.name === 'No Meals Selected'
     );
-    // console.log(MealsItems.length);
-    // console.log(MealsItems[noMealsSelectedIndex]);
-    allMeals.splice(62, 1);
 
-    // MealsItems.sort(Utils.nameByAlpha);
+    allMeals.splice(noMealSelectedIndex, 1);
+
     filteredMeals = allMeals;
 
     res.render('Meal_Index', { meal: filteredMeals, user: foundUser });

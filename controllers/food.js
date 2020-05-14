@@ -37,11 +37,8 @@ router.get('/', (req, res) => {
     noFoodSelectedIndex = allFood.findIndex(
       (food) => food.name === 'No Food Selected'
     );
-    // console.log(foodItems.length);
-    // console.log(foodItems[noFoodSelectedIndex]);
-    allFood.splice(62, 1);
 
-    // foodItems.sort(Utils.nameByAlpha);
+    allFood.splice(noFoodSelectedIndex, 1);
     filteredFood = allFood;
 
     res.render('Food_Index', { food: filteredFood, user: foundUser });
