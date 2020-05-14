@@ -33,7 +33,19 @@ router.get('/', (req, res) => {
       activeSession: true,
     });
 
-    res.render('Meal_Index', { meal: allMeals, user: foundUser });
+    let filteredMeals;
+
+    noMealSelectedIndex = allMeals.findIndex(
+      (meal) => meal.name === 'No Meals Selected'
+    );
+    // console.log(MealsItems.length);
+    // console.log(MealsItems[noMealsSelectedIndex]);
+    allMeals.splice(62, 1);
+
+    // MealsItems.sort(Utils.nameByAlpha);
+    filteredMeals = allMeals;
+
+    res.render('Meal_Index', { meal: filteredMeals, user: foundUser });
   });
 });
 

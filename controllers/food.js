@@ -32,16 +32,28 @@ router.get('/', (req, res) => {
       activeSession: true,
     });
 
-    res.render('Food_Index', { food: allFood, user: foundUser });
+    let filteredFood;
+
+    noFoodSelectedIndex = allFood.findIndex(
+      (food) => food.name === 'No Food Selected'
+    );
+    // console.log(foodItems.length);
+    // console.log(foodItems[noFoodSelectedIndex]);
+    allFood.splice(62, 1);
+
+    // foodItems.sort(Utils.nameByAlpha);
+    filteredFood = allFood;
+
+    res.render('Food_Index', { food: filteredFood, user: foundUser });
   });
 });
 
-// FOOD SEED ROUTE
-router.get('/seed', (req, res) => {
-  Food.create(seedData, (err, data) => {
-    res.send(data);
-  });
-});
+// // FOOD SEED ROUTE
+// router.get('/seed', (req, res) => {
+//   Food.create(seedData, (err, data) => {
+//     res.send(data);
+//   });
+// });
 
 // FOOD SHOW ROUTE
 router.get('/:id', (req, res) => {
