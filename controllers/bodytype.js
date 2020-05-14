@@ -28,12 +28,12 @@ router.get('/sandbox', (req, res) => {
   });
 });
 
-// Body Type SEED ROUTE
-router.get('/seed', (req, res) => {
-  BodyType.create(seedData, (err, data) => {
-    res.send(data);
-  });
-});
+// // Body Type SEED ROUTE
+// router.get('/seed', (req, res) => {
+//   BodyType.create(seedData, (err, data) => {
+//     res.send(data);
+//   });
+// });
 
 /*******************************
  * Functional Routes - perform functions in the browser (http verb)
