@@ -28,12 +28,12 @@ router.get('/sandbox', (req, res) => {
   });
 });
 
-// Blueprint SEED ROUTE
-router.get('/seed', (req, res) => {
-  Blueprint.create(seedData, (err, data) => {
-    res.send(data);
-  });
-});
+// // Blueprint SEED ROUTE
+// router.get('/seed', (req, res) => {
+//   Blueprint.create(seedData, (err, data) => {
+//     res.send(data);
+//   });
+// });
 
 /*******************************
  * Functional Routes - perform functions in the browser (http verb)

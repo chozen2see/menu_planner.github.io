@@ -5,6 +5,25 @@ class Food_Index extends React.Component {
   render() {
     const { user, food } = this.props;
 
+    // DRY: Want this in app.js so that I can use in other views
+    function nameByAlpha(a, b) {
+      // Use toUpperCase() to ignore character casing
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      // console.log(nameA);
+      // console.log(nameB);
+      let comparison = 0;
+      if (nameA > nameB) {
+        comparison = 1;
+      } else if (nameA < nameB) {
+        comparison = -1;
+      }
+      // console.log(comparison);
+      return comparison;
+    }
+
+    food.sort(nameByAlpha);
+
     // render method must return something...
     return (
       <AppLayout currentUser={user}>
