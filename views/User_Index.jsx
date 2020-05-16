@@ -34,7 +34,7 @@ class User_Index extends React.Component {
                     className='btn  w3-border w3-round-large'
                   />
                 </a>
-                <form action=''>
+                <form action={`/user/${user.id}?_method=DELETE`} method='POST'>
                   <input
                     type='submit'
                     value='DELETE'
@@ -71,7 +71,7 @@ class User_Index extends React.Component {
               <div className='aside_header mp-bg-orange'>
                 <div className='aside_header_title'>
                   <p className='aside_header_title_menus'>MENUS</p>
-                  <a href='/menu/new'>
+                  <a href={`/menu/new?userId=${user.id}`}>
                     <div className='tooltip'>
                       <input
                         type='button'
@@ -110,7 +110,7 @@ class User_Index extends React.Component {
               <div className='aside_header mp-bg-blue'>
                 <div className='aside_header_title'>
                   <p className='aside_header_title_meals'>MEALS</p>
-                  <a href='/meal/new'>
+                  <a href={`/meal/new?userId=${user.id}`}>
                     <div className='tooltip'>
                       <input
                         type='button'

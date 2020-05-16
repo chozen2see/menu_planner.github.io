@@ -1,5 +1,6 @@
 const React = require('react');
 const AppLayout = require('./AppLayout');
+import { nameByAlpha } from '../utilities/utils.js';
 
 class Meal_New extends React.Component {
   render() {
@@ -10,6 +11,11 @@ class Meal_New extends React.Component {
       vegetableItems,
       fruitItems,
     } = this.props;
+
+    if (proteinItems) proteinItems.sort(nameByAlpha);
+    if (carbohydrateItems) carbohydrateItems.sort(nameByAlpha);
+    if (vegetableItems) vegetableItems.sort(nameByAlpha);
+    if (fruitItems) fruitItems.sort(nameByAlpha);
 
     return (
       <AppLayout currentUser={user}>

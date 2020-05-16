@@ -65,6 +65,10 @@ app.use('/meal', mealController);
 app.use('/menu', menuController);
 app.use('/user', userController);
 
+app.get('*', (req, res) => {
+  res.send('<h1>PAGE NOT FOUND</h1>');
+});
+
 /**********************
  * APP LISTENER
  **********************/

@@ -51,7 +51,7 @@ class User_New extends React.Component {
                   type='hidden'
                   name='activeSession'
                   id='activeSession'
-                  value='false'
+                  value='true'
                 />
               </div>
               <div className='btn_group'>

@@ -76,15 +76,37 @@ router.get('/:id/edit', (req, res) => {
 router.post('/', (req, res) => {
   // create new User document using a Model. based on Schema -> Model -> Document
   User.create(req.body, (error, createdUser) => {
-    // once created - respond to client with document from database
-    // res.send(createdUser);
-    res.redirect('/user/sandbox');
+    // mark other users inactive
+
+    User.updateMany(
+      { _id: { $ne: createdUser.id } },
+      { $set: { activeSession: false } },
+      (error, updatedUsers) => {
+        console.log(updatedUsers);
+      }
+    );
+
+    // redire to menu planner for new user
+    res.redirect(`/user/menu_planner/${createdUser.id}`);
   });
 });
 
 router.delete('/:id', (req, res) => {
   User.findByIdAndRemove(req.params.id, (error, removedUser) => {
-    res.redirect('/user/sandbox'); //redirect back to index route
+    // remove all user meals and menus
+    Meal.remove({ user: removedUser.id });
+    Menu.remove({ user: removedUser.id });
+
+    // find next available user and make their session active
+    User.findOne({ _id: { $ne: removedUser.id } }, (error, foundUser) => {
+      User.findByIdAndUpdate(
+        foundUser.id,
+        { $set: { activeSession: true } },
+        (error, updatedUser) => {
+          res.redirect(`/user/menu_planner/${updatedUser.id}`);
+        }
+      );
+    });
   }); //remove the item from the array
 });
 

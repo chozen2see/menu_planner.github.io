@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const methodOverride = require('method-override');
 
 // DATA
 const seedData = require('../models/seed/menu.js');
@@ -9,8 +8,6 @@ const seedData = require('../models/seed/menu.js');
 const Menu = require('../models/menu.js'); // ./ used for relative path (not node_modules)
 const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
 const Meal = require('../models/meal.js'); // ./ used for relative path (not node_modules)
-
-router.use(methodOverride('_method'));
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -41,11 +38,12 @@ router.get('/', (req, res) => {
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
+  const userId = req.query.userId;
   Meal.find({}, async (error, allMeals) => {
     // find the current active user
     const foundUser = await User.findOne({
-      // _id: currentUser._id,
-      activeSession: true,
+      _id: userId,
+      // activeSession: true,
     });
 
     res.render('Menu_New', { meal: allMeals, user: foundUser });

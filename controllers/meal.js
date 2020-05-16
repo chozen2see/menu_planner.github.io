@@ -49,12 +49,12 @@ router.get('/', (req, res) => {
 
 // NEW ROUTE
 router.get('/new', (req, res) => {
-  // res.send('New');
+  const userId = req.query.userId;
 
   //const foundUser =
   User.findOne({
-    // _id: currentUser._id,
-    activeSession: true,
+    _id: userId,
+    // activeSession: true,
   }).exec(async (error, foundUser) => {
     const proteinItems = await Food.find({ class: 'Protein' });
 
