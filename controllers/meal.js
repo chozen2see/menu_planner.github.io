@@ -25,12 +25,12 @@ const Food = require('../models/food.js'); // ./ used for relative path (not nod
 
 // INDEX ROUTE
 router.get('/', (req, res) => {
-  Meal.find({}, async (error, allMeals) => {
-    // res.send(allMeals);
+  const userId = req.query.userId;
+  Meal.find({ user: userId }, async (error, allMeals) => {
     // find the current active user
     const foundUser = await User.findOne({
-      // _id: currentUser._id,
-      activeSession: true,
+      _id: userId,
+      // activeSession: true,
     });
 
     let filteredMeals;
@@ -145,24 +145,21 @@ router.get('/:id/edit', (req, res) => {
 
 // CREATE ROUTE - 5eb69c30633d4e3c95590619
 router.post('/', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   // create new Meal document using a Model. based on Schema -> Model -> Document
   Meal.create(req.body, (error, createdMeal) => {
     // once created - respond to client with document from database
-    console.log(createdMeal);
-    res.redirect('/meal');
+    // console.log(createdMeal);
+    res.redirect(`/user/menu_planner/${createdMeal.user}`);
   });
 });
 
 // method override, overrides post route and sends it to this delete route
 // DELETE ROUTE
 router.delete('/:id', (req, res) => {
-  // Meal.findByIdAndRemove(req.params.id, (error, removedMeal) => {
-  //   res.redirect('/'); //redirect back to index route
-  // }); //remove the item from the array
   Meal.findByIdAndRemove(req.params.id, (error, removedMeal) => {
-    res.redirect('/meal'); //redirect back to index route
+    res.redirect(`/user/menu_planner/${removedMeal.user}`);
   });
 });
 
@@ -172,39 +169,50 @@ router.put('/:id', (req, res) => {
 
   Meal.findOne({ _id: req.params.id }).exec(async (error, foundMeal) => {
     // console.log(foundMeal);
+    try {
+      const foundUser = await User.findOne({
+        activeSession: true,
+      });
 
-    const foundUser = await User.findOne({
-      activeSession: true,
-    });
+      const noFoodSelected = await Food.findOne(
+        { name: 'No Food Selected' },
+        async (error, noFoodSelected) => {
+          if (req.body.protein === '') {
+            req.body.protein = noFoodSelected.id;
+            // '5eb69c30633d4e3c95590619'
+          }
 
-    if (req.body.protein === '') {
-      req.body.protein = '5eb69c30633d4e3c95590619';
+          if (req.body.fruit === '') {
+            req.body.fruit = noFoodSelected.id;
+          }
+
+          if (req.body.carbohydrate === '') {
+            req.body.carbohydrate = noFoodSelected.id;
+          }
+
+          if (req.body.vegetable === '') {
+            req.body.vegetable = noFoodSelected.id;
+          }
+
+          req.body.user = foundUser.id;
+
+          // console.log(req.body);
+
+          const updated = await Meal.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            (error, updatedMeal) => {
+              console.log(updatedMeal);
+              res.redirect(`/meal/${req.params.id}`);
+            }
+          );
+        }
+      );
+
+      // end test no food selected
+    } catch (error) {
+      console.log(error);
     }
-
-    if (req.body.fruit === '') {
-      req.body.fruit = '5eb69c30633d4e3c95590619';
-    }
-
-    if (req.body.carbohydrate === '') {
-      req.body.carbohydrate = '5eb69c30633d4e3c95590619';
-    }
-
-    if (req.body.vegetable === '') {
-      req.body.vegetable = '5eb69c30633d4e3c95590619';
-    }
-
-    req.body.user = foundUser.id;
-
-    // console.log(req.body);
-
-    const updated = await Meal.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      (error, updatedMeal) => {
-        console.log(updatedMeal);
-        res.redirect(`/meal/${req.params.id}`);
-      }
-    );
   });
 });
 

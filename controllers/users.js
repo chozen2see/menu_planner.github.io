@@ -196,12 +196,17 @@ router.get('/switch/:userId', (req, res) => {
   const userToken = req.query.userToken;
 
   // Make current user inactive
-  User.findByIdAndUpdate({ _id: userId }, { activeSession: false });
-
-  // Activate selected user based on userToken
-  User.findByIdAndUpdate({ _id: userToken }, { activeSession: true });
-
-  res.redirect(`/user/menu_planner/${userToken}`);
+  User.findByIdAndUpdate({ _id: userId }, { activeSession: false }).exec(
+    async (error, foundUser) => {
+      // Activate selected user based on userToken
+      await User.findByIdAndUpdate(
+        { _id: userToken },
+        { activeSession: true }
+      ).exec((error, foundUser) => {
+        res.redirect(`/user/menu_planner/${userToken}`);
+      });
+    }
+  );
 });
 
 // SANDBOX ROUTE - SEE DATA ON ALL USERS

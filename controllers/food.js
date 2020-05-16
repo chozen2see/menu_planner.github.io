@@ -73,5 +73,12 @@ router.get('/:id', (req, res) => {
  * Update: Updates a resource [PUT]
  */
 
+// SANDBOX ROUTE - SEE DATA ON ALL USERS
+router.get('/all/sandbox', (req, res) => {
+  Food.find({}, (error, allFood) => {
+    res.send(allFood);
+  });
+});
+
 // export the router
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const methodOverride = require('method-override');
 
 // DATA
 const seedData = require('../models/seed/menu.js');
@@ -8,6 +9,8 @@ const seedData = require('../models/seed/menu.js');
 const Menu = require('../models/menu.js'); // ./ used for relative path (not node_modules)
 const User = require('../models/users.js'); // ./ used for relative path (not node_modules)
 const Meal = require('../models/meal.js'); // ./ used for relative path (not node_modules)
+
+router.use(methodOverride('_method'));
 
 /*******************************
  * Presentational Routes - routes that show us something in the browser (ALL GET REQUESTS)
@@ -26,8 +29,6 @@ const Meal = require('../models/meal.js'); // ./ used for relative path (not nod
 router.get('/', (req, res) => {
   const userId = req.query.userId;
   Menu.find({ user: userId }, async (error, allMenus) => {
-    // res.send(allMenus);
-
     // find the current active user
     const foundUser = await User.findOne({
       _id: userId,
@@ -68,18 +69,53 @@ router.get('/:id', (req, res) => {
     })
     .exec(async (error, foundMenu) => {
       // console.log(foundMenu);
+      try {
+        // find the current active user
+        const foundUser = await User.findOne({
+          // _id: currentUser._id,
+          activeSession: true,
+        });
 
-      // find the current active user
-      const foundUser = await User.findOne({
-        // _id: currentUser._id,
-        activeSession: true,
-      });
+        // if meal was deleted set to no meal selected
+        const noMealSelected = await Meal.findOne(
+          { name: 'No Meal Selected' },
+          (error, noMealSelected) => {
+            if (foundMenu.breakfast === null) {
+              foundMenu.breakfast = noMealSelected;
+            }
 
-      res.render('Menu_Show', {
-        menu: foundMenu,
+            if (foundMenu.morning_snack === null) {
+              foundMenu.morning_snack = noMealSelected;
+            }
 
-        user: foundUser,
-      });
+            if (foundMenu.lunch === null) {
+              foundMenu.lunch = noMealSelected;
+            }
+
+            if (foundMenu.afternoon_snack === null) {
+              foundMenu.afternoon_snack = noMealSelected;
+            }
+
+            if (foundMenu.dinner === null) {
+              foundMenu.dinner = noMealSelected;
+            }
+
+            if (foundMenu.evening_snack === null) {
+              foundMenu.evening_snack = noMealSelected;
+            }
+
+            res.render('Menu_Show', {
+              menu: foundMenu,
+
+              user: foundUser,
+            });
+          }
+        );
+
+        // end test no meal selected
+      } catch (error) {
+        console.log(error);
+      }
     });
 });
 
@@ -122,7 +158,7 @@ router.post('/', (req, res) => {
   Menu.create(req.body, (error, createdMenu) => {
     // once created - respond to client with document from database
     // res.send(createdMenu);
-    res.redirect('/menu');
+    res.redirect(`/user/menu_planner/${createdMenu.user}`);
   });
 });
 
@@ -130,7 +166,7 @@ router.post('/', (req, res) => {
 // DELETE ROUTE
 router.delete('/:id', (req, res) => {
   Menu.findByIdAndRemove(req.params.id, (error, removedMenu) => {
-    res.redirect('/'); //redirect back to index route
+    res.redirect(`/user/menu_planner/${removedMenu.user}`); //redirect back to index route
   }); //remove the item from the array
 });
 

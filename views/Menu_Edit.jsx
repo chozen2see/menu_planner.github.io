@@ -1,9 +1,13 @@
 const React = require('react');
 const AppLayout = require('./AppLayout');
+import { nameByAlpha } from '../utilities/utils.js';
 
 class Menu_Edit extends React.Component {
   render() {
     const { menu, meal, user } = this.props;
+
+    if (meal) meal.sort(nameByAlpha);
+
     // console.log(menu);
     return (
       <AppLayout currentUser={user}>
@@ -14,6 +18,15 @@ class Menu_Edit extends React.Component {
               <a href='/menu/new'>
                 <input type='button' value='+' className='w3-circle addBtn' />
               </a>
+              <div className='btn_group_delete'>
+                <form action={`/menu/${menu._id}?_method=DELETE`} method='post'>
+                  <input
+                    type='submit'
+                    value='DELETE'
+                    className='btn_menu_delete w3-border w3-round-large'
+                  />
+                </form>
+              </div>
             </div>
             <div className='menu_details'>
               <form action={`/menu/${menu.id}?_method=PUT`} method='post'>
@@ -198,14 +211,6 @@ class Menu_Edit extends React.Component {
                     value='SAVE CHANGES'
                     className='btn_menu w3-border w3-round-large'
                   />
-
-                  <form action={`/menu/${menu._id}?_method=DELETE`}>
-                    <input
-                      type='submit'
-                      value='DELETE'
-                      className='btn_menu w3-border w3-round-large'
-                    />
-                  </form>
                 </div>
               </form>
             </div>

@@ -133,19 +133,24 @@ class User_Index extends React.Component {
                 </div>
               </div>
               <div className='aside_body'>
-                {meal.map((mealItem, index) => {
-                  return (
-                    <a href={`/meal/${mealItem.id}`} className='meal_list_link'>
-                      <div
-                        className={`card w3-card w3-hover-shadow card_meal_item`}
-                      >
-                        <p className='meal_list_name w3-container'>
-                          {mealItem.name}
-                        </p>
-                      </div>
-                    </a>
-                  );
-                })}
+                {meal !== undefined
+                  ? meal.map((mealItem, index) => {
+                      return (
+                        <a
+                          href={`/meal/${mealItem.id}`}
+                          className='meal_list_link'
+                        >
+                          <div
+                            className={`card w3-card w3-hover-shadow card_meal_item`}
+                          >
+                            <p className='meal_list_name w3-container'>
+                              {mealItem.name}
+                            </p>
+                          </div>
+                        </a>
+                      );
+                    })
+                  : ''}
               </div>
             </aside>
             {/* FOOD ITEMS */}

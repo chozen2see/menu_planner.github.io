@@ -5,8 +5,7 @@ import { nameByAlpha } from '../utilities/utils.js';
 class Meal_Index extends React.Component {
   render() {
     const { user, meal } = this.props;
-
-    meal.sort(nameByAlpha);
+    if (meal) meal.sort(nameByAlpha);
 
     // render method must return something...
     return (
@@ -15,9 +14,9 @@ class Meal_Index extends React.Component {
           <div className='meal_title'>
             <h2>All Meals</h2>
 
-            <a href='/meal/new'>
+            {/* <a href='/meal/new'>
               <input type='button' value='+' className='w3-circle addBtn' />
-            </a>
+            </a> */}
           </div>
           <div className='list_all'>
             {meal.map((mealItem, index) => {

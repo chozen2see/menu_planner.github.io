@@ -18,6 +18,15 @@ class Meal_Edit extends React.Component {
           <div className='meal_container'>
             <div className='meal_title'>
               <h2>Edit Meal</h2>
+              <div className='btn_group_delete'>
+                <form action={`/meal/${meal.id}?_method=DELETE`} method='POST'>
+                  <input
+                    type='submit'
+                    value='DELETE'
+                    className='btn_meal_delete w3-border w3-round-large'
+                  />
+                </form>
+              </div>
             </div>
             <div className='meal_details'>
               <form action={`/meal/${meal.id}?_method=PUT`} method='post'>
@@ -158,16 +167,6 @@ class Meal_Edit extends React.Component {
                       className='btn_meal w3-border w3-round-large'
                     />
                   </a>
-                  <form
-                    action={`/meal/${meal.id}?_method=DELETE`}
-                    method='POST'
-                  >
-                    <input
-                      type='submit'
-                      value='DELETE'
-                      className='btn_meal w3-border w3-round-large'
-                    />
-                  </form>
                 </div>
               </form>
             </div>

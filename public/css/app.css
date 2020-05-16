@@ -162,6 +162,20 @@ nav a:hover {
   /* border: 2px solid var(--door-blue); */
 }
 
+/* .btn_group_delete {
+} */
+
+.btn_meal_delete,
+.btn_menu_delete {
+  margin: 0.3em 0 0 7em;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.btn_meal_delete {
+  margin-left: 13.5em;
+}
+
 .btn {
   min-width: 115px;
   height: 35px;
@@ -176,7 +190,9 @@ nav a:hover {
 
 .btn_user,
 .btn_menu,
+/* .btn_menu_delete, */
 .btn_meal {
+  cursor: pointer;
   padding: 20px;
 }
 
