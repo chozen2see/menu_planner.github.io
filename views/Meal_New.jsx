@@ -46,7 +46,7 @@ class Meal_New extends React.Component {
                     id='protein'
                     name='protein'
                   >
-                    <option value='5eb69c30633d4e3c95590619'>
+                    <option value={user.noFoodSelectedId}>
                       --SELECT A PROTEIN--
                     </option>
                     {proteinItems.map((item, index) => {
@@ -58,7 +58,7 @@ class Meal_New extends React.Component {
                 <p>
                   Fruit:{' '}
                   <select className='fruit_selection' id='fruit' name='fruit'>
-                    <option value='5eb69c30633d4e3c95590619'>
+                    <option value={user.noFoodSelectedId}>
                       --SELECT A FRUIT--
                     </option>
                     {fruitItems.map((item, index) => {
@@ -74,7 +74,7 @@ class Meal_New extends React.Component {
                     id='carbohydrate'
                     name='carbohydrate'
                   >
-                    <option value='5eb69c30633d4e3c95590619'>
+                    <option value={user.noFoodSelectedId}>
                       --SELECT A CARBOHYDRATE--
                     </option>
                     {carbohydrateItems.map((item, index) => {
@@ -90,7 +90,7 @@ class Meal_New extends React.Component {
                     id='vegetable'
                     name='vegetable'
                   >
-                    <option value='5eb69c30633d4e3c95590619'>
+                    <option value={user.noFoodSelectedId}>
                       --SELECT A VEGETABLE--
                     </option>
                     {vegetableItems.map((item, index) => {

@@ -45,6 +45,12 @@ router.get('/new', (req, res) => {
       _id: userId,
       // activeSession: true,
     });
+    const noMealSelected = await Meal.findOne(
+      { name: 'No Meal Selected' },
+      async (error, noMealSelected) => {
+        foundUser.noMealSelectedId = noMealSelected.id;
+      }
+    );
 
     res.render('Menu_New', { meal: allMeals, user: foundUser });
   });

@@ -56,6 +56,13 @@ router.get('/new', (req, res) => {
     _id: userId,
     // activeSession: true,
   }).exec(async (error, foundUser) => {
+    const noFoodSelected = await Food.findOne(
+      { name: 'No Food Selected' },
+      async (error, noFoodSelected) => {
+        foundUser.noFoodSelectedId = noFoodSelected.id;
+      }
+    );
+
     const proteinItems = await Food.find({ class: 'Protein' });
 
     const carbohydrateItems = await Food.find({ class: 'Carbohydrate' });

@@ -29,7 +29,7 @@ class Menu_New extends React.Component {
                     id='breakfast'
                     name='breakfast'
                   >
-                    <option value='5eb6a45f48c0b73e0e057f30'>
+                    <option value={user.noMealSelectedId}>
                       --SELECT A MEAL--
                     </option>
                     {meal.map((item, index) => {
@@ -46,7 +46,7 @@ class Menu_New extends React.Component {
                     id='morning_snack'
                     name='morning_snack'
                   >
-                    <option value='5eb6a45f48c0b73e0e057f30'>
+                    <option value={user.noMealSelectedId}>
                       --SELECT A MEAL--
                     </option>
                     {meal.map((item, index) => {
@@ -57,7 +57,7 @@ class Menu_New extends React.Component {
                 <div className='menu_lunch'>
                   <h3 className='menu_lunch_title'>Lunch</h3>
                   <select className='lunch_selection' id='lunch' name='lunch'>
-                    <option value='5eb6a45f48c0b73e0e057f30'>
+                    <option value={user.noMealSelectedId}>
                       --SELECT A MEAL--
                     </option>
                     {meal.map((item, index) => {
@@ -74,7 +74,7 @@ class Menu_New extends React.Component {
                     id='afternoon_snack'
                     name='afternoon_snack'
                   >
-                    <option value='5eb6a45f48c0b73e0e057f30'>
+                    <option value={user.noMealSelectedId}>
                       --SELECT A MEAL--
                     </option>
                     {meal.map((item, index) => {
@@ -89,7 +89,7 @@ class Menu_New extends React.Component {
                     id='dinner'
                     name='dinner'
                   >
-                    <option value='5eb6a45f48c0b73e0e057f30'>
+                    <option value={user.noMealSelectedId}>
                       --SELECT A MEAL--
                     </option>
                     {meal.map((item, index) => {
@@ -106,7 +106,7 @@ class Menu_New extends React.Component {
                     id='evening_snack'
                     name='evening_snack'
                   >
-                    <option value='5eb6a45f48c0b73e0e057f30'>
+                    <option value={user.noMealSelectedId}>
                       --SELECT A MEAL--
                     </option>
                     {meal.map((item, index) => {
