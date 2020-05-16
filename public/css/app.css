@@ -65,29 +65,34 @@ body {
   color: var(--door-blue);
 }
 
-/* p {
-  margin: 10px 5px;
-  padding: 10px 15px;
-} */
-
-header {
-  display: flex;
-  justify-content: space-between;
+.hidden {
+  visibility: hidden;
 }
 
-header h2 {
+header {
+  width: 97%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pageHeader {
   flex: 0.4;
   min-width: 400px;
+  display: flex;
+}
+
+.switchAccountsBtn {
+  cursor: pointer;
+  margin: 5px 0 10px 5px;
+  /* font-size: 0.5em; */
 }
 
 header nav {
   flex: 0.6;
 }
 
-header h2,
-header nav,
 footer {
-  /* border: 2px solid red; */
   padding: 0 1.5%;
 }
 
@@ -243,11 +248,18 @@ aside:nth-child(2) {
   margin: 12px 0 15px 10px;
 }
 
+.user_selection,
 .food_selection {
-  margin-left: 15px;
+  margin: 15px 15px 0 15px;
+
   height: 30px;
   width: 175px;
   align-self: center;
+}
+
+.select_user {
+  display: flex;
+  min-width: 500px;
 }
 
 .aside_header_center {
@@ -303,10 +315,6 @@ aside:nth-child(2) {
 
 .card_food_item:hover {
   background-color: var(--door-green);
-}
-
-.food_selection {
-  margin: 15px 15px 0 15px;
 }
 
 .user_container,
@@ -381,4 +389,29 @@ footer {
   padding-top: 5px;
   position: absolute;
   bottom: 0;
+}
+
+/* tooltip style */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--door-blue);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

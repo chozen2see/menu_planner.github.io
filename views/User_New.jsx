@@ -3,11 +3,11 @@ const AppLayout = require('./AppLayout');
 
 class User_New extends React.Component {
   render() {
-    // const { user } = this.props;
+    const { user } = this.props;
 
     // render method must return something...
     return (
-      <AppLayout currentUser={''}>
+      <AppLayout currentUser={user}>
         <div className='container'>
           {/* USER PANEL */}
           <div className='user_container'>

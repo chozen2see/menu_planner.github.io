@@ -2,10 +2,9 @@ const React = require('react');
 
 class AppLayout extends React.Component {
   render() {
-    // const id =
-    //   this.props.currentUser._id !== undefined
-    //     ? this.props.currentUser._id
-    //     : '5eacca26965eadc463792723';
+    const id = this.props.currentUser.id;
+    const showSwitch = this.props.currentUser.showSwitch;
+    const filteredUsers = this.props.currentUser.filteredUsers;
 
     const username =
       this.props.currentUser.name !== undefined
@@ -27,19 +26,73 @@ class AppLayout extends React.Component {
         </head>
         <body>
           <header>
-            {/* <img
-              src='/images/logo.png'
-              alt='Mongoose Store Logo'
-              className='logo'
-            />
-            <p className='greeting'>Welcome, {username}!</p> */}
-            <h2>{username} Menu Planner</h2>
+            <div className='pageHeader'>
+              <h2>{username} Menu Planner</h2>
+
+              {/* ? - IF CLICKED SWITCH USER PANEL IS DISPLAYED */}
+              <div className={`tooltip ${showSwitch === true ? 'hidden' : ''}`}>
+                <form action={`/user/menu_planner/${id}`} method='get'>
+                  <input
+                    type='submit'
+                    value='?'
+                    className='w3-circle switchAccountsBtn tooltip'
+                    name='showSwitch'
+                  />
+                </form>
+                <span className='tooltiptext'>Open Switch User Panel</span>
+              </div>
+            </div>
+
+            {/* SWITCH USER PANEL */}
+            <div
+              className={`select_user ${showSwitch === true ? '' : 'hidden'}`}
+            >
+              <form action={`/user/switch/${id}`} method='get'>
+                <select
+                  className='user_selection'
+                  id='user_selection'
+                  name='userToken'
+                >
+                  {filteredUsers
+                    ? filteredUsers.map((user) => {
+                        return (
+                          <option
+                            // selected={id === user.id ? 'true' : ''}
+                            value={`${user.id}`}
+                          >
+                            {user.name}
+                          </option>
+                        );
+                      })
+                    : ''}
+
+                  {/* <option
+                    selected={id === '5eb685e8a94be9389e27c782' ? 'true' : ''}
+                    value='5eb685e8a94be9389e27c782'
+                  >
+                    TestUser
+                  </option> */}
+                </select>
+                <input type='submit' value='Switch User' />
+              </form>
+
+              {/* X - IF CLICKED SWITCH USER PANEL IS CLOSED */}
+              <div className={`tooltip ${showSwitch === true ? '' : 'hidden'}`}>
+                <form action={`/user/menu_planner/${id}`} method='get'>
+                  <input
+                    type='submit'
+                    value='X'
+                    className='w3-circle switchAccountsBtn tooltip'
+                    name='showSwitch'
+                  />
+                </form>
+                <span className='tooltiptext'>Close User Switch Panel</span>
+              </div>
+            </div>
+
             <nav>
-              {/* <a href='/meal/new'>Create Meal</a>*/}
               <a href='/user/new'>New User</a>
-              <a href={`/user/menu_planner/${this.props.currentUser.id}`}>
-                View Menu Planner
-              </a>
+              <a href={`/user/menu_planner/${id}`}>View Menu Planner</a>
             </nav>
           </header>
           <div className='wrapper'>{this.props.children}</div>

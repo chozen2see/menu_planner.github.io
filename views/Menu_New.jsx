@@ -4,6 +4,7 @@ const AppLayout = require('./AppLayout');
 class Menu_New extends React.Component {
   render() {
     const { meal, user } = this.props;
+
     // console.log(menu);
     return (
       <AppLayout currentUser={user}>

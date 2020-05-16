@@ -24,13 +24,14 @@ const Meal = require('../models/meal.js'); // ./ used for relative path (not nod
 
 // INDEX ROUTE
 router.get('/', (req, res) => {
-  Menu.find({}, async (error, allMenus) => {
+  const userId = req.query.userId;
+  Menu.find({ user: userId }, async (error, allMenus) => {
     // res.send(allMenus);
 
     // find the current active user
     const foundUser = await User.findOne({
-      // _id: currentUser._id,
-      activeSession: true,
+      _id: userId,
+      // activeSession: true,
     });
 
     res.render('Menu_Index', { menu: allMenus, user: foundUser });
@@ -40,7 +41,6 @@ router.get('/', (req, res) => {
 // NEW ROUTE
 router.get('/new', (req, res) => {
   Meal.find({}, async (error, allMeals) => {
-    // res.send(allMeals);
     // find the current active user
     const foundUser = await User.findOne({
       // _id: currentUser._id,
@@ -92,7 +92,6 @@ router.get('/:id/edit', (req, res) => {
       model: 'Meal',
     })
     .exec(async (error, foundMenu) => {
-      // res.send(foundMenu);
       // find the current active user
       const foundUser = await User.findOne({
         // _id: currentUser._id,

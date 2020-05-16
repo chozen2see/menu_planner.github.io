@@ -1,32 +1,14 @@
 const React = require('react');
 const AppLayout = require('./AppLayout');
-// const Utils = require('../public/js/app.js');
-import { nameByAlpha } from '../public/js/app.js';
+import { nameByAlpha } from '../utilities/utils.js';
 
 class User_Index extends React.Component {
   render() {
     const { user, food, menu, meal, filter } = this.props;
 
-    // DRY: Want this in app.js so that I can use in other views
-    function nameByAlpha(a, b) {
-      // Use toUpperCase() to ignore character casing
-      const nameA = a.name.toUpperCase();
-      const nameB = b.name.toUpperCase();
-      // console.log(nameA);
-      // console.log(nameB);
-      let comparison = 0;
-      if (nameA > nameB) {
-        comparison = 1;
-      } else if (nameA < nameB) {
-        comparison = -1;
-      }
-      // console.log(comparison);
-      return comparison;
-    }
-
-    menu.sort(nameByAlpha);
-    meal.sort(nameByAlpha);
-    food.sort(nameByAlpha);
+    if (menu) menu.sort(nameByAlpha);
+    if (meal) meal.sort(nameByAlpha);
+    if (food) food.sort(nameByAlpha);
 
     // render method must return something...
     return (
@@ -61,6 +43,7 @@ class User_Index extends React.Component {
                 </form>
               </div>
             </div>
+
             <div className='user_info w3-container'>
               <p className='w3-container'>User Name: {user.name}</p>
               <p className='w3-container'>Height: {user.height}</p>
@@ -89,21 +72,19 @@ class User_Index extends React.Component {
                 <div className='aside_header_title'>
                   <p className='aside_header_title_menus'>MENUS</p>
                   <a href='/menu/new'>
-                    <input
-                      type='button'
-                      value='+'
-                      className='w3-circle addBtn'
-                    />
+                    <div className='tooltip'>
+                      <input
+                        type='button'
+                        value='+'
+                        className='w3-circle addBtn'
+                      />
+                      <span className='tooltiptext'>Add New Menu</span>
+                    </div>
                   </a>
                 </div>
-                <div className='aside_header_center'>
-                  {/* <input type='button' value='+' className='w3-circle addBtn' /> */}
-                  {/* <a href='/meal/new' className='addBtn'>
-                    <img src='../../images/add.png' alt='Add Button' />
-                  </a> */}
-                </div>
+                <div className='aside_header_center'></div>
                 <div className='aside_header_seeAll'>
-                  <a href='/menu' className='seeAll'>
+                  <a href={`/menu?userId=${user.id}`} className='seeAll'>
                     SEE ALL
                   </a>
                 </div>
@@ -130,11 +111,14 @@ class User_Index extends React.Component {
                 <div className='aside_header_title'>
                   <p className='aside_header_title_meals'>MEALS</p>
                   <a href='/meal/new'>
-                    <input
-                      type='button'
-                      value='+'
-                      className='w3-circle addBtn'
-                    />
+                    <div className='tooltip'>
+                      <input
+                        type='button'
+                        value='+'
+                        className='w3-circle addBtn'
+                      />
+                      <span className='tooltiptext'>Add New Meal</span>
+                    </div>
                   </a>
                 </div>
                 <div className='aside_header_center'>
@@ -143,7 +127,7 @@ class User_Index extends React.Component {
                   </a> */}
                 </div>
                 <div className='aside_header_seeAll'>
-                  <a href='/meal' className='seeAll_meals'>
+                  <a href={`/meal?userId=${user.id}`} className='seeAll_meals'>
                     SEE ALL
                   </a>
                 </div>
@@ -158,9 +142,6 @@ class User_Index extends React.Component {
                         <p className='meal_list_name w3-container'>
                           {mealItem.name}
                         </p>
-                        {/* <p className='meal_list_type w3-container'>
-                          {mealItem.type}
-                        </p> */}
                       </div>
                     </a>
                   );

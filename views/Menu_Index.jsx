@@ -1,9 +1,11 @@
 const React = require('react');
 const AppLayout = require('./AppLayout');
+import { nameByAlpha } from '../utilities/utils.js';
 
 class Menu_Index extends React.Component {
   render() {
     const { user, menu } = this.props;
+    menu.sort(nameByAlpha);
 
     // render method must return something...
     return (
